@@ -1,0 +1,505 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		650B367D1808F72A0029A086 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650B367C1808F72A0029A086 /* Foundation.framework */; };
+		650B367F1808F72A0029A086 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650B367E1808F72A0029A086 /* CoreGraphics.framework */; };
+		650B36811808F72A0029A086 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650B36801808F72A0029A086 /* UIKit.framework */; };
+		650B36831808F72A0029A086 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650B36821808F72A0029A086 /* CoreData.framework */; };
+		650B36891808F72A0029A086 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 650B36871808F72A0029A086 /* InfoPlist.strings */; };
+		650B368B1808F72A0029A086 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 650B368A1808F72A0029A086 /* main.m */; };
+		650B368F1808F72A0029A086 /* driverAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 650B368E1808F72A0029A086 /* driverAppDelegate.m */; };
+		650B36921808F72A0029A086 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 650B36901808F72A0029A086 /* Main.storyboard */; };
+		650B36951808F72A0029A086 /* TaxiBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 650B36931808F72A0029A086 /* TaxiBook.xcdatamodeld */; };
+		650B36981808F72A0029A086 /* driverMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650B36971808F72A0029A086 /* driverMasterViewController.m */; };
+		650B369B1808F72A0029A086 /* driverDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650B369A1808F72A0029A086 /* driverDetailViewController.m */; };
+		650B369D1808F72A0029A086 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 650B369C1808F72A0029A086 /* Images.xcassets */; };
+		650B36A41808F72A0029A086 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650B36A31808F72A0029A086 /* XCTest.framework */; };
+		650B36A51808F72A0029A086 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650B367C1808F72A0029A086 /* Foundation.framework */; };
+		650B36A61808F72B0029A086 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650B36801808F72A0029A086 /* UIKit.framework */; };
+		650B36A71808F72B0029A086 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650B36821808F72A0029A086 /* CoreData.framework */; };
+		650B36AF1808F72B0029A086 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 650B36AD1808F72B0029A086 /* InfoPlist.strings */; };
+		650B36B11808F72B0029A086 /* TaxiBookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 650B36B01808F72B0029A086 /* TaxiBookTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		650B36A81808F72B0029A086 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 650B36711808F72A0029A086 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 650B36781808F72A0029A086;
+			remoteInfo = TaxiBook;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		650B36791808F72A0029A086 /* TaxiBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaxiBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		650B367C1808F72A0029A086 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		650B367E1808F72A0029A086 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		650B36801808F72A0029A086 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		650B36821808F72A0029A086 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		650B36861808F72A0029A086 /* TaxiBook-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TaxiBook-Info.plist"; sourceTree = "<group>"; };
+		650B36881808F72A0029A086 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		650B368A1808F72A0029A086 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		650B368C1808F72A0029A086 /* TaxiBook-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TaxiBook-Prefix.pch"; sourceTree = "<group>"; };
+		650B368D1808F72A0029A086 /* driverAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = driverAppDelegate.h; sourceTree = "<group>"; };
+		650B368E1808F72A0029A086 /* driverAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = driverAppDelegate.m; sourceTree = "<group>"; };
+		650B36911808F72A0029A086 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		650B36941808F72A0029A086 /* TaxiBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaxiBook.xcdatamodel; sourceTree = "<group>"; };
+		650B36961808F72A0029A086 /* driverMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = driverMasterViewController.h; sourceTree = "<group>"; };
+		650B36971808F72A0029A086 /* driverMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = driverMasterViewController.m; sourceTree = "<group>"; };
+		650B36991808F72A0029A086 /* driverDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = driverDetailViewController.h; sourceTree = "<group>"; };
+		650B369A1808F72A0029A086 /* driverDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = driverDetailViewController.m; sourceTree = "<group>"; };
+		650B369C1808F72A0029A086 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		650B36A21808F72A0029A086 /* TaxiBookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaxiBookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		650B36A31808F72A0029A086 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		650B36AC1808F72B0029A086 /* TaxiBookTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TaxiBookTests-Info.plist"; sourceTree = "<group>"; };
+		650B36AE1808F72B0029A086 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		650B36B01808F72B0029A086 /* TaxiBookTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaxiBookTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		650B36761808F72A0029A086 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				650B367F1808F72A0029A086 /* CoreGraphics.framework in Frameworks */,
+				650B36831808F72A0029A086 /* CoreData.framework in Frameworks */,
+				650B36811808F72A0029A086 /* UIKit.framework in Frameworks */,
+				650B367D1808F72A0029A086 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		650B369F1808F72A0029A086 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				650B36A41808F72A0029A086 /* XCTest.framework in Frameworks */,
+				650B36A71808F72B0029A086 /* CoreData.framework in Frameworks */,
+				650B36A61808F72B0029A086 /* UIKit.framework in Frameworks */,
+				650B36A51808F72A0029A086 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		650B36701808F72A0029A086 = {
+			isa = PBXGroup;
+			children = (
+				650B36841808F72A0029A086 /* TaxiBook */,
+				650B36AA1808F72B0029A086 /* TaxiBookTests */,
+				650B367B1808F72A0029A086 /* Frameworks */,
+				650B367A1808F72A0029A086 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		650B367A1808F72A0029A086 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				650B36791808F72A0029A086 /* TaxiBook.app */,
+				650B36A21808F72A0029A086 /* TaxiBookTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		650B367B1808F72A0029A086 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				650B367C1808F72A0029A086 /* Foundation.framework */,
+				650B367E1808F72A0029A086 /* CoreGraphics.framework */,
+				650B36801808F72A0029A086 /* UIKit.framework */,
+				650B36821808F72A0029A086 /* CoreData.framework */,
+				650B36A31808F72A0029A086 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		650B36841808F72A0029A086 /* TaxiBook */ = {
+			isa = PBXGroup;
+			children = (
+				650B368D1808F72A0029A086 /* driverAppDelegate.h */,
+				650B368E1808F72A0029A086 /* driverAppDelegate.m */,
+				650B36901808F72A0029A086 /* Main.storyboard */,
+				650B36961808F72A0029A086 /* driverMasterViewController.h */,
+				650B36971808F72A0029A086 /* driverMasterViewController.m */,
+				650B36991808F72A0029A086 /* driverDetailViewController.h */,
+				650B369A1808F72A0029A086 /* driverDetailViewController.m */,
+				650B369C1808F72A0029A086 /* Images.xcassets */,
+				650B36931808F72A0029A086 /* TaxiBook.xcdatamodeld */,
+				650B36851808F72A0029A086 /* Supporting Files */,
+			);
+			path = TaxiBook;
+			sourceTree = "<group>";
+		};
+		650B36851808F72A0029A086 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				650B36861808F72A0029A086 /* TaxiBook-Info.plist */,
+				650B36871808F72A0029A086 /* InfoPlist.strings */,
+				650B368A1808F72A0029A086 /* main.m */,
+				650B368C1808F72A0029A086 /* TaxiBook-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		650B36AA1808F72B0029A086 /* TaxiBookTests */ = {
+			isa = PBXGroup;
+			children = (
+				650B36B01808F72B0029A086 /* TaxiBookTests.m */,
+				650B36AB1808F72B0029A086 /* Supporting Files */,
+			);
+			path = TaxiBookTests;
+			sourceTree = "<group>";
+		};
+		650B36AB1808F72B0029A086 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				650B36AC1808F72B0029A086 /* TaxiBookTests-Info.plist */,
+				650B36AD1808F72B0029A086 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		650B36781808F72A0029A086 /* TaxiBook */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 650B36B41808F72B0029A086 /* Build configuration list for PBXNativeTarget "TaxiBook" */;
+			buildPhases = (
+				650B36751808F72A0029A086 /* Sources */,
+				650B36761808F72A0029A086 /* Frameworks */,
+				650B36771808F72A0029A086 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TaxiBook;
+			productName = TaxiBook;
+			productReference = 650B36791808F72A0029A086 /* TaxiBook.app */;
+			productType = "com.apple.product-type.application";
+		};
+		650B36A11808F72A0029A086 /* TaxiBookTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 650B36B71808F72B0029A086 /* Build configuration list for PBXNativeTarget "TaxiBookTests" */;
+			buildPhases = (
+				650B369E1808F72A0029A086 /* Sources */,
+				650B369F1808F72A0029A086 /* Frameworks */,
+				650B36A01808F72A0029A086 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				650B36A91808F72B0029A086 /* PBXTargetDependency */,
+			);
+			name = TaxiBookTests;
+			productName = TaxiBookTests;
+			productReference = 650B36A21808F72A0029A086 /* TaxiBookTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		650B36711808F72A0029A086 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = driver;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "ngyik wai";
+				TargetAttributes = {
+					650B36A11808F72A0029A086 = {
+						TestTargetID = 650B36781808F72A0029A086;
+					};
+				};
+			};
+			buildConfigurationList = 650B36741808F72A0029A086 /* Build configuration list for PBXProject "TaxiBook" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 650B36701808F72A0029A086;
+			productRefGroup = 650B367A1808F72A0029A086 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				650B36781808F72A0029A086 /* TaxiBook */,
+				650B36A11808F72A0029A086 /* TaxiBookTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		650B36771808F72A0029A086 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				650B369D1808F72A0029A086 /* Images.xcassets in Resources */,
+				650B36891808F72A0029A086 /* InfoPlist.strings in Resources */,
+				650B36921808F72A0029A086 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		650B36A01808F72A0029A086 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				650B36AF1808F72B0029A086 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		650B36751808F72A0029A086 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				650B368F1808F72A0029A086 /* driverAppDelegate.m in Sources */,
+				650B36951808F72A0029A086 /* TaxiBook.xcdatamodeld in Sources */,
+				650B36981808F72A0029A086 /* driverMasterViewController.m in Sources */,
+				650B369B1808F72A0029A086 /* driverDetailViewController.m in Sources */,
+				650B368B1808F72A0029A086 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		650B369E1808F72A0029A086 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				650B36B11808F72B0029A086 /* TaxiBookTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		650B36A91808F72B0029A086 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 650B36781808F72A0029A086 /* TaxiBook */;
+			targetProxy = 650B36A81808F72B0029A086 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		650B36871808F72A0029A086 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				650B36881808F72A0029A086 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		650B36901808F72A0029A086 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				650B36911808F72A0029A086 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		650B36AD1808F72B0029A086 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				650B36AE1808F72B0029A086 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		650B36B21808F72B0029A086 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		650B36B31808F72B0029A086 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		650B36B51808F72B0029A086 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TaxiBook/TaxiBook-Prefix.pch";
+				INFOPLIST_FILE = "TaxiBook/TaxiBook-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		650B36B61808F72B0029A086 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TaxiBook/TaxiBook-Prefix.pch";
+				INFOPLIST_FILE = "TaxiBook/TaxiBook-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		650B36B81808F72B0029A086 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TaxiBook.app/TaxiBook";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TaxiBook/TaxiBook-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "TaxiBookTests/TaxiBookTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		650B36B91808F72B0029A086 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TaxiBook.app/TaxiBook";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TaxiBook/TaxiBook-Prefix.pch";
+				INFOPLIST_FILE = "TaxiBookTests/TaxiBookTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		650B36741808F72A0029A086 /* Build configuration list for PBXProject "TaxiBook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				650B36B21808F72B0029A086 /* Debug */,
+				650B36B31808F72B0029A086 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		650B36B41808F72B0029A086 /* Build configuration list for PBXNativeTarget "TaxiBook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				650B36B51808F72B0029A086 /* Debug */,
+				650B36B61808F72B0029A086 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		650B36B71808F72B0029A086 /* Build configuration list for PBXNativeTarget "TaxiBookTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				650B36B81808F72B0029A086 /* Debug */,
+				650B36B91808F72B0029A086 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		650B36931808F72A0029A086 /* TaxiBook.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				650B36941808F72A0029A086 /* TaxiBook.xcdatamodel */,
+			);
+			currentVersion = 650B36941808F72A0029A086 /* TaxiBook.xcdatamodel */;
+			path = TaxiBook.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 650B36711808F72A0029A086 /* Project object */;
+}
