@@ -1,0 +1,7 @@
+platform :ios, '7.0'
+pod 'AFNetworking', '~> 2.0'
+pod 'SSKeychain', '~> 1.2.1'
+pod 'SecureNSUserDefaults', '~> 1.0.0'
+pod 'Google-API-Client', '~> 0.0.1'
+pod 'Google-Maps-iOS-SDK', '~> 1.6'
+
