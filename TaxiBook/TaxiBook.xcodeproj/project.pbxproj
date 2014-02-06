@@ -25,6 +25,7 @@
 		650B36A71808F72B0029A086 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650B36821808F72A0029A086 /* CoreData.framework */; };
 		650B36AF1808F72B0029A086 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 650B36AD1808F72B0029A086 /* InfoPlist.strings */; };
 		650B36B11808F72B0029A086 /* TaxiBookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 650B36B01808F72B0029A086 /* TaxiBookTests.m */; };
+		8E27BDF5610F4828BF277B6E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 782FD4AD354D441EAF27DDB2 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 		650B36AC1808F72B0029A086 /* TaxiBookTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TaxiBookTests-Info.plist"; sourceTree = "<group>"; };
 		650B36AE1808F72B0029A086 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		650B36B01808F72B0029A086 /* TaxiBookTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaxiBookTests.m; sourceTree = "<group>"; };
+		782FD4AD354D441EAF27DDB2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8022F0ADFCE5467192DFB5B6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,7 @@
 				650B36831808F72A0029A086 /* CoreData.framework in Frameworks */,
 				650B36811808F72A0029A086 /* UIKit.framework in Frameworks */,
 				650B367D1808F72A0029A086 /* Foundation.framework in Frameworks */,
+				8E27BDF5610F4828BF277B6E /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +100,7 @@
 				650B36AA1808F72B0029A086 /* TaxiBookTests */,
 				650B367B1808F72A0029A086 /* Frameworks */,
 				650B367A1808F72A0029A086 /* Products */,
+				8022F0ADFCE5467192DFB5B6 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,6 +121,7 @@
 				650B36801808F72A0029A086 /* UIKit.framework */,
 				650B36821808F72A0029A086 /* CoreData.framework */,
 				650B36A31808F72A0029A086 /* XCTest.framework */,
+				782FD4AD354D441EAF27DDB2 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -173,9 +179,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 650B36B41808F72B0029A086 /* Build configuration list for PBXNativeTarget "TaxiBook" */;
 			buildPhases = (
+				F924C24355C14240A5AFABAE /* Check Pods Manifest.lock */,
 				650B36751808F72A0029A086 /* Sources */,
 				650B36761808F72A0029A086 /* Frameworks */,
 				650B36771808F72A0029A086 /* Resources */,
+				D6350C04E71540F58F0B8CD4 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -210,9 +218,9 @@
 		650B36711808F72A0029A086 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = driver;
+				CLASSPREFIX = taxibook;
 				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = "ngyik wai";
+				ORGANIZATIONNAME = taxibook;
 				TargetAttributes = {
 					650B36A11808F72A0029A086 = {
 						TestTargetID = 650B36781808F72A0029A086;
@@ -258,6 +266,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D6350C04E71540F58F0B8CD4 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F924C24355C14240A5AFABAE /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		650B36751808F72A0029A086 /* Sources */ = {
@@ -392,6 +433,7 @@
 		};
 		650B36B51808F72B0029A086 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8022F0ADFCE5467192DFB5B6 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -405,6 +447,7 @@
 		};
 		650B36B61808F72B0029A086 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8022F0ADFCE5467192DFB5B6 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -477,6 +520,7 @@
 				650B36B61808F72B0029A086 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		650B36B71808F72B0029A086 /* Build configuration list for PBXNativeTarget "TaxiBookTests" */ = {
 			isa = XCConfigurationList;
@@ -485,6 +529,7 @@
 				650B36B91808F72B0029A086 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
