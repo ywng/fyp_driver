@@ -15,7 +15,6 @@
 		650B368B1808F72A0029A086 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 650B368A1808F72A0029A086 /* main.m */; };
 		650B368F1808F72A0029A086 /* driverAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 650B368E1808F72A0029A086 /* driverAppDelegate.m */; };
 		650B36921808F72A0029A086 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 650B36901808F72A0029A086 /* Main.storyboard */; };
-		650B36951808F72A0029A086 /* TaxiBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 650B36931808F72A0029A086 /* TaxiBook.xcdatamodeld */; };
 		650B36981808F72A0029A086 /* driverMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650B36971808F72A0029A086 /* driverMasterViewController.m */; };
 		650B369B1808F72A0029A086 /* driverDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650B369A1808F72A0029A086 /* driverDetailViewController.m */; };
 		650B369D1808F72A0029A086 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 650B369C1808F72A0029A086 /* Images.xcassets */; };
@@ -25,6 +24,16 @@
 		650B36A71808F72B0029A086 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650B36821808F72A0029A086 /* CoreData.framework */; };
 		650B36AF1808F72B0029A086 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 650B36AD1808F72B0029A086 /* InfoPlist.strings */; };
 		650B36B11808F72B0029A086 /* TaxiBookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 650B36B01808F72B0029A086 /* TaxiBookTests.m */; };
+		771B68DA18A3DAA2001AF1EA /* GoogleMapPlaceSearchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 771B68D118A3DAA2001AF1EA /* GoogleMapPlaceSearchService.m */; };
+		771B68DB18A3DAA2001AF1EA /* MDDirectionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 771B68D318A3DAA2001AF1EA /* MDDirectionService.m */; };
+		771B68DC18A3DAA2001AF1EA /* TaxiBookConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 771B68D518A3DAA2001AF1EA /* TaxiBookConnectionManager.m */; };
+		771B68DD18A3DAA2001AF1EA /* TaxiBookErrorSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 771B68D718A3DAA2001AF1EA /* TaxiBookErrorSet.m */; };
+		771B68DE18A3DAA2001AF1EA /* TaxiBookStringSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 771B68D918A3DAA2001AF1EA /* TaxiBookStringSet.m */; };
+		771B68EB18A3DAB5001AF1EA /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 771B68E118A3DAB5001AF1EA /* OrderModel.m */; };
+		771B68EC18A3DAB5001AF1EA /* Driver.m in Sources */ = {isa = PBXBuildFile; fileRef = 771B68E418A3DAB5001AF1EA /* Driver.m */; };
+		771B68ED18A3DAB5001AF1EA /* GMPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 771B68E618A3DAB5001AF1EA /* GMPlace.m */; };
+		771B68EE18A3DAB5001AF1EA /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 771B68E818A3DAB5001AF1EA /* Order.m */; };
+		771B68EF18A3DAB5001AF1EA /* TaxiBookGPS.m in Sources */ = {isa = PBXBuildFile; fileRef = 771B68EA18A3DAB5001AF1EA /* TaxiBookGPS.m */; };
 		8E27BDF5610F4828BF277B6E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 782FD4AD354D441EAF27DDB2 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -51,7 +60,6 @@
 		650B368D1808F72A0029A086 /* driverAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = driverAppDelegate.h; sourceTree = "<group>"; };
 		650B368E1808F72A0029A086 /* driverAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = driverAppDelegate.m; sourceTree = "<group>"; };
 		650B36911808F72A0029A086 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		650B36941808F72A0029A086 /* TaxiBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaxiBook.xcdatamodel; sourceTree = "<group>"; };
 		650B36961808F72A0029A086 /* driverMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = driverMasterViewController.h; sourceTree = "<group>"; };
 		650B36971808F72A0029A086 /* driverMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = driverMasterViewController.m; sourceTree = "<group>"; };
 		650B36991808F72A0029A086 /* driverDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = driverDetailViewController.h; sourceTree = "<group>"; };
@@ -62,6 +70,26 @@
 		650B36AC1808F72B0029A086 /* TaxiBookTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TaxiBookTests-Info.plist"; sourceTree = "<group>"; };
 		650B36AE1808F72B0029A086 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		650B36B01808F72B0029A086 /* TaxiBookTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaxiBookTests.m; sourceTree = "<group>"; };
+		771B68D018A3DAA2001AF1EA /* GoogleMapPlaceSearchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleMapPlaceSearchService.h; sourceTree = "<group>"; };
+		771B68D118A3DAA2001AF1EA /* GoogleMapPlaceSearchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleMapPlaceSearchService.m; sourceTree = "<group>"; };
+		771B68D218A3DAA2001AF1EA /* MDDirectionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDDirectionService.h; sourceTree = "<group>"; };
+		771B68D318A3DAA2001AF1EA /* MDDirectionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDDirectionService.m; sourceTree = "<group>"; };
+		771B68D418A3DAA2001AF1EA /* TaxiBookConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookConnectionManager.h; sourceTree = "<group>"; };
+		771B68D518A3DAA2001AF1EA /* TaxiBookConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookConnectionManager.m; sourceTree = "<group>"; };
+		771B68D618A3DAA2001AF1EA /* TaxiBookErrorSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookErrorSet.h; sourceTree = "<group>"; };
+		771B68D718A3DAA2001AF1EA /* TaxiBookErrorSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookErrorSet.m; sourceTree = "<group>"; };
+		771B68D818A3DAA2001AF1EA /* TaxiBookStringSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookStringSet.h; sourceTree = "<group>"; };
+		771B68D918A3DAA2001AF1EA /* TaxiBookStringSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookStringSet.m; sourceTree = "<group>"; };
+		771B68E018A3DAB5001AF1EA /* OrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderModel.h; sourceTree = "<group>"; };
+		771B68E118A3DAB5001AF1EA /* OrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderModel.m; sourceTree = "<group>"; };
+		771B68E318A3DAB5001AF1EA /* Driver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Driver.h; sourceTree = "<group>"; };
+		771B68E418A3DAB5001AF1EA /* Driver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Driver.m; sourceTree = "<group>"; };
+		771B68E518A3DAB5001AF1EA /* GMPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMPlace.h; sourceTree = "<group>"; };
+		771B68E618A3DAB5001AF1EA /* GMPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMPlace.m; sourceTree = "<group>"; };
+		771B68E718A3DAB5001AF1EA /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
+		771B68E818A3DAB5001AF1EA /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
+		771B68E918A3DAB5001AF1EA /* TaxiBookGPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookGPS.h; sourceTree = "<group>"; };
+		771B68EA18A3DAB5001AF1EA /* TaxiBookGPS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookGPS.m; sourceTree = "<group>"; };
 		782FD4AD354D441EAF27DDB2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8022F0ADFCE5467192DFB5B6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +157,8 @@
 		650B36841808F72A0029A086 /* TaxiBook */ = {
 			isa = PBXGroup;
 			children = (
+				771B68DF18A3DAB5001AF1EA /* Models */,
+				771B68CF18A3DAA2001AF1EA /* Utility */,
 				650B368D1808F72A0029A086 /* driverAppDelegate.h */,
 				650B368E1808F72A0029A086 /* driverAppDelegate.m */,
 				650B36901808F72A0029A086 /* Main.storyboard */,
@@ -137,7 +167,6 @@
 				650B36991808F72A0029A086 /* driverDetailViewController.h */,
 				650B369A1808F72A0029A086 /* driverDetailViewController.m */,
 				650B369C1808F72A0029A086 /* Images.xcassets */,
-				650B36931808F72A0029A086 /* TaxiBook.xcdatamodeld */,
 				650B36851808F72A0029A086 /* Supporting Files */,
 			);
 			path = TaxiBook;
@@ -170,6 +199,48 @@
 				650B36AD1808F72B0029A086 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		771B68CF18A3DAA2001AF1EA /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				771B68D018A3DAA2001AF1EA /* GoogleMapPlaceSearchService.h */,
+				771B68D118A3DAA2001AF1EA /* GoogleMapPlaceSearchService.m */,
+				771B68D218A3DAA2001AF1EA /* MDDirectionService.h */,
+				771B68D318A3DAA2001AF1EA /* MDDirectionService.m */,
+				771B68D418A3DAA2001AF1EA /* TaxiBookConnectionManager.h */,
+				771B68D518A3DAA2001AF1EA /* TaxiBookConnectionManager.m */,
+				771B68D618A3DAA2001AF1EA /* TaxiBookErrorSet.h */,
+				771B68D718A3DAA2001AF1EA /* TaxiBookErrorSet.m */,
+				771B68D818A3DAA2001AF1EA /* TaxiBookStringSet.h */,
+				771B68D918A3DAA2001AF1EA /* TaxiBookStringSet.m */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		771B68DF18A3DAB5001AF1EA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				771B68E018A3DAB5001AF1EA /* OrderModel.h */,
+				771B68E118A3DAB5001AF1EA /* OrderModel.m */,
+				771B68E218A3DAB5001AF1EA /* Unit */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		771B68E218A3DAB5001AF1EA /* Unit */ = {
+			isa = PBXGroup;
+			children = (
+				771B68E318A3DAB5001AF1EA /* Driver.h */,
+				771B68E418A3DAB5001AF1EA /* Driver.m */,
+				771B68E518A3DAB5001AF1EA /* GMPlace.h */,
+				771B68E618A3DAB5001AF1EA /* GMPlace.m */,
+				771B68E718A3DAB5001AF1EA /* Order.h */,
+				771B68E818A3DAB5001AF1EA /* Order.m */,
+				771B68E918A3DAB5001AF1EA /* TaxiBookGPS.h */,
+				771B68EA18A3DAB5001AF1EA /* TaxiBookGPS.m */,
+			);
+			path = Unit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,10 +377,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				650B368F1808F72A0029A086 /* driverAppDelegate.m in Sources */,
-				650B36951808F72A0029A086 /* TaxiBook.xcdatamodeld in Sources */,
+				771B68EF18A3DAB5001AF1EA /* TaxiBookGPS.m in Sources */,
 				650B36981808F72A0029A086 /* driverMasterViewController.m in Sources */,
+				771B68EB18A3DAB5001AF1EA /* OrderModel.m in Sources */,
+				771B68DB18A3DAA2001AF1EA /* MDDirectionService.m in Sources */,
+				771B68EC18A3DAB5001AF1EA /* Driver.m in Sources */,
+				771B68ED18A3DAB5001AF1EA /* GMPlace.m in Sources */,
 				650B369B1808F72A0029A086 /* driverDetailViewController.m in Sources */,
+				771B68DD18A3DAA2001AF1EA /* TaxiBookErrorSet.m in Sources */,
+				771B68EE18A3DAB5001AF1EA /* Order.m in Sources */,
+				771B68DA18A3DAA2001AF1EA /* GoogleMapPlaceSearchService.m in Sources */,
+				771B68DE18A3DAA2001AF1EA /* TaxiBookStringSet.m in Sources */,
 				650B368B1808F72A0029A086 /* main.m in Sources */,
+				771B68DC18A3DAA2001AF1EA /* TaxiBookConnectionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,19 +612,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		650B36931808F72A0029A086 /* TaxiBook.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				650B36941808F72A0029A086 /* TaxiBook.xcdatamodel */,
-			);
-			currentVersion = 650B36941808F72A0029A086 /* TaxiBook.xcdatamodel */;
-			path = TaxiBook.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 650B36711808F72A0029A086 /* Project object */;
 }
