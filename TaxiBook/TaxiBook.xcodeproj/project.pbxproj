@@ -13,10 +13,10 @@
 		650B36831808F72A0029A086 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650B36821808F72A0029A086 /* CoreData.framework */; };
 		650B36891808F72A0029A086 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 650B36871808F72A0029A086 /* InfoPlist.strings */; };
 		650B368B1808F72A0029A086 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 650B368A1808F72A0029A086 /* main.m */; };
-		650B368F1808F72A0029A086 /* driverAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 650B368E1808F72A0029A086 /* driverAppDelegate.m */; };
+		650B368F1808F72A0029A086 /* DriverAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 650B368E1808F72A0029A086 /* DriverAppDelegate.m */; };
 		650B36921808F72A0029A086 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 650B36901808F72A0029A086 /* Main.storyboard */; };
-		650B36981808F72A0029A086 /* driverMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650B36971808F72A0029A086 /* driverMasterViewController.m */; };
-		650B369B1808F72A0029A086 /* driverDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650B369A1808F72A0029A086 /* driverDetailViewController.m */; };
+		650B36981808F72A0029A086 /* DriverMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650B36971808F72A0029A086 /* DriverMasterViewController.m */; };
+		650B369B1808F72A0029A086 /* DriverDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650B369A1808F72A0029A086 /* DriverDetailViewController.m */; };
 		650B369D1808F72A0029A086 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 650B369C1808F72A0029A086 /* Images.xcassets */; };
 		650B36A41808F72A0029A086 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650B36A31808F72A0029A086 /* XCTest.framework */; };
 		650B36A51808F72A0029A086 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650B367C1808F72A0029A086 /* Foundation.framework */; };
@@ -57,13 +57,13 @@
 		650B36881808F72A0029A086 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		650B368A1808F72A0029A086 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		650B368C1808F72A0029A086 /* TaxiBook-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TaxiBook-Prefix.pch"; sourceTree = "<group>"; };
-		650B368D1808F72A0029A086 /* driverAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = driverAppDelegate.h; sourceTree = "<group>"; };
-		650B368E1808F72A0029A086 /* driverAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = driverAppDelegate.m; sourceTree = "<group>"; };
+		650B368D1808F72A0029A086 /* DriverAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DriverAppDelegate.h; sourceTree = "<group>"; };
+		650B368E1808F72A0029A086 /* DriverAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DriverAppDelegate.m; sourceTree = "<group>"; };
 		650B36911808F72A0029A086 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		650B36961808F72A0029A086 /* driverMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = driverMasterViewController.h; sourceTree = "<group>"; };
-		650B36971808F72A0029A086 /* driverMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = driverMasterViewController.m; sourceTree = "<group>"; };
-		650B36991808F72A0029A086 /* driverDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = driverDetailViewController.h; sourceTree = "<group>"; };
-		650B369A1808F72A0029A086 /* driverDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = driverDetailViewController.m; sourceTree = "<group>"; };
+		650B36961808F72A0029A086 /* DriverMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DriverMasterViewController.h; sourceTree = "<group>"; };
+		650B36971808F72A0029A086 /* DriverMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DriverMasterViewController.m; sourceTree = "<group>"; };
+		650B36991808F72A0029A086 /* DriverDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DriverDetailViewController.h; sourceTree = "<group>"; };
+		650B369A1808F72A0029A086 /* DriverDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DriverDetailViewController.m; sourceTree = "<group>"; };
 		650B369C1808F72A0029A086 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		650B36A21808F72A0029A086 /* TaxiBookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaxiBookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		650B36A31808F72A0029A086 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -159,13 +159,13 @@
 			children = (
 				771B68DF18A3DAB5001AF1EA /* Models */,
 				771B68CF18A3DAA2001AF1EA /* Utility */,
-				650B368D1808F72A0029A086 /* driverAppDelegate.h */,
-				650B368E1808F72A0029A086 /* driverAppDelegate.m */,
+				650B368D1808F72A0029A086 /* DriverAppDelegate.h */,
+				650B368E1808F72A0029A086 /* DriverAppDelegate.m */,
 				650B36901808F72A0029A086 /* Main.storyboard */,
-				650B36961808F72A0029A086 /* driverMasterViewController.h */,
-				650B36971808F72A0029A086 /* driverMasterViewController.m */,
-				650B36991808F72A0029A086 /* driverDetailViewController.h */,
-				650B369A1808F72A0029A086 /* driverDetailViewController.m */,
+				650B36961808F72A0029A086 /* DriverMasterViewController.h */,
+				650B36971808F72A0029A086 /* DriverMasterViewController.m */,
+				650B36991808F72A0029A086 /* DriverDetailViewController.h */,
+				650B369A1808F72A0029A086 /* DriverDetailViewController.m */,
 				650B369C1808F72A0029A086 /* Images.xcassets */,
 				650B36851808F72A0029A086 /* Supporting Files */,
 			);
@@ -376,14 +376,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				650B368F1808F72A0029A086 /* driverAppDelegate.m in Sources */,
+				650B368F1808F72A0029A086 /* DriverAppDelegate.m in Sources */,
 				771B68EF18A3DAB5001AF1EA /* TaxiBookGPS.m in Sources */,
-				650B36981808F72A0029A086 /* driverMasterViewController.m in Sources */,
+				650B36981808F72A0029A086 /* DriverMasterViewController.m in Sources */,
 				771B68EB18A3DAB5001AF1EA /* OrderModel.m in Sources */,
 				771B68DB18A3DAA2001AF1EA /* MDDirectionService.m in Sources */,
 				771B68EC18A3DAB5001AF1EA /* Driver.m in Sources */,
 				771B68ED18A3DAB5001AF1EA /* GMPlace.m in Sources */,
-				650B369B1808F72A0029A086 /* driverDetailViewController.m in Sources */,
+				650B369B1808F72A0029A086 /* DriverDetailViewController.m in Sources */,
 				771B68DD18A3DAA2001AF1EA /* TaxiBookErrorSet.m in Sources */,
 				771B68EE18A3DAB5001AF1EA /* Order.m in Sources */,
 				771B68DA18A3DAA2001AF1EA /* GoogleMapPlaceSearchService.m in Sources */,

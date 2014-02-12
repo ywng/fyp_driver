@@ -1,5 +1,5 @@
 //
-//  driverMasterViewController.h
+//  DriverMasterViewController.h
 //  TaxiBook
 //
 //  Created by ngyik wai on 10/11/13.
@@ -8,11 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import <CoreData/CoreData.h>
+@interface DriverMasterViewController : UITableViewController
 
-@interface driverMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
-
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

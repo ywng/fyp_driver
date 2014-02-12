@@ -1,5 +1,5 @@
 //
-//  driverDetailViewController.h
+//  DriverDetailViewController.h
 //  TaxiBook
 //
 //  Created by ngyik wai on 10/11/13.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface driverDetailViewController : UIViewController
+@interface DriverDetailViewController : UIViewController
 
 @property (strong, nonatomic) id detailItem;
 
