@@ -7,12 +7,20 @@
 //
 
 #import "DriverAppDelegate.h"
+#import <NSUserDefaults+SecureAdditions.h>
+#import <GoogleMaps/GoogleMaps.h>
 
 @implementation DriverAppDelegate
 
 //@synthesize managedObjectContext = _managedObjectContext;
 //@synthesize managedObjectModel = _managedObjectModel;
 //@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+- (void)setNSSecret
+{
+    NSString *userDefaultKey  = @"thisIsASecretKey";
+    [[NSUserDefaults standardUserDefaults] setSecret:userDefaultKey];
+    
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -20,7 +28,16 @@
 //    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
 //    driverMasterViewController *controller = (driverMasterViewController *)navigationController.topViewController;
 //    controller.managedObjectContext = self.managedObjectContext;
+    // Override point for customization after application launch.
+    [application setStatusBarHidden:NO];
+    [application setStatusBarStyle:UIStatusBarStyleLightContent];
+    [self setNSSecret];
+    
+    // start google map service
+    [GMSServices provideAPIKey:TaxiBookGoogleAPIIOSKey];
+    
     return YES;
+
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

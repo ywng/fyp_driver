@@ -1,5 +1,5 @@
 //
-//  CustomNavigationControllerViewController.h
+//  TabBarViewController.h
 //  TaxiBook
 //
 //  Created by Yik Wai Ng Jason on 14/2/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CustomNavigationControllerViewController : UINavigationController
+@interface TabBarViewController : UITabBarController
 
 @end

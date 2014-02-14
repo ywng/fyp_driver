@@ -1,18 +1,18 @@
 //
-//  CustomNavigationControllerViewController.m
+//  CustomNavigationController.m
 //  TaxiBook
 //
 //  Created by Yik Wai Ng Jason on 14/2/14.
 //  Copyright (c) 2014 taxibook. All rights reserved.
 //
 
-#import "CustomNavigationControllerViewController.h"
+#import "CustomNavigationController.h"
 
-@interface CustomNavigationControllerViewController ()
+@interface CustomNavigationController ()
 
 @end
 
-@implementation CustomNavigationControllerViewController
+@implementation CustomNavigationController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,11 +37,9 @@
     // *tintColor* sets the buttons color
 }
 
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 @end
