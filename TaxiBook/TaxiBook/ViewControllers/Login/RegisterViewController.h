@@ -14,8 +14,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
-
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
+
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *retypePasswordTextField;

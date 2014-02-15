@@ -7,7 +7,7 @@
         <!--Tab Bar View Controller-->
         <scene sceneID="dJ2-3Z-pfp">
             <objects>
-                <tabBarController definesPresentationContext="YES" id="lLV-PO-uEN" customClass="TabBarViewController" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" definesPresentationContext="YES" id="lLV-PO-uEN" customClass="TabBarViewController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="jEz-1Y-gan">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
@@ -15,10 +15,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="j5Z-dw-Nmv" kind="modal" identifier="welcomeModal" id="dPE-5i-FxC"/>
                         <segue destination="rHj-7L-hHl" kind="relationship" relationship="viewControllers" id="XbK-0Z-Xtq"/>
                         <segue destination="waP-Sx-yyt" kind="relationship" relationship="viewControllers" id="kwE-vx-a49"/>
                         <segue destination="y3w-gO-G82" kind="relationship" relationship="viewControllers" id="iyd-dj-lJR"/>
+                        <segue destination="j5Z-dw-Nmv" kind="modal" identifier="welcomeModal" id="cjW-o2-k7M"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tia-J7-pDy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -179,10 +179,10 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="uploadLicenseButtonPressed:" destination="Xg1-0F-H5o" eventType="touchUpInside" id="I2a-o6-mKQ"/>
+                                    <action selector="uploadLicenseButtonPressed:" destination="Xg1-0F-H5o" eventType="touchUpInside" id="xf3-4F-6H8"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D5U-Ny-9iv">
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D5U-Ny-9iv">
                                 <rect key="frame" x="48" y="321" width="225" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -224,7 +224,7 @@
                     <connections>
                         <outlet property="driverLicense" destination="vCU-Ie-4g3" id="Er4-fL-j0o"/>
                         <outlet property="emailTextField" destination="0vB-A7-7MG" id="6ps-a1-boX"/>
-                        <outlet property="firstNameTextField" destination="xLw-YB-16D" id="TBv-7w-TGL"/>
+                        <outlet property="firstNameTextField" destination="xLw-YB-16D" id="fwh-U5-Z87"/>
                         <outlet property="lastNameTextField" destination="9OG-2U-KM7" id="ZZj-23-ZmE"/>
                         <outlet property="passwordTextField" destination="oTh-3t-7xx" id="Pfo-eO-YyY"/>
                         <outlet property="phoneTextField" destination="aka-Ip-Kih" id="n0c-6b-ECe"/>
@@ -237,13 +237,14 @@
             </objects>
             <point key="canvasLocation" x="287" y="-1475"/>
         </scene>
-        <!--Custom Navigation Controller-->
+        <!--Custom Navigation Controller - Item-->
         <scene sceneID="Ope-ff-tiP">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wNx-mp-mH4" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="j5Z-dw-Nmv" customClass="CustomNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="awM-MN-44P"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="D9M-j0-Ixp"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9xV-Qb-IZu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -254,6 +255,7 @@
                         <segue destination="5xe-M3-PtY" kind="relationship" relationship="rootViewController" id="vI2-ee-5aM"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wNx-mp-mH4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-508" y="-1387"/>
         </scene>

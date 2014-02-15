@@ -39,7 +39,7 @@
     BOOL loggedIn = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyLoggedIn];
     NSLog(@"Logged in? %d", loggedIn);
     if (!loggedIn) {
-        [self performSegueWithIdentifier:@"welcomeModal" sender:self];
+      [self performSegueWithIdentifier:@"welcomeModal" sender:self];
     }
     
 }

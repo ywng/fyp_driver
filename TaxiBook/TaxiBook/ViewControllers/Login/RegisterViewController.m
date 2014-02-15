@@ -19,10 +19,10 @@
 @implementation RegisterViewController
 @synthesize selectedLicenseImageView;
 
+
 - (IBAction)uploadLicenseButtonPressed:(id)sender {
-     [self.takeController takePhotoOrChooseFromLibrary];
-     self.takeController.allowsEditingPhoto = [(UISwitch *)sender isOn];
-    
+    [self.takeController takePhotoOrChooseFromLibrary];
+    //self.takeController.allowsEditingPhoto = [(UISwitch *)sender isOn];
 }
 
 - (IBAction)registerButtonPressed:(id)sender {
@@ -158,7 +158,11 @@
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]]];
     self.takeController = [[FDTakeController alloc] init];
+    self.takeController.viewControllerForPresentingImagePickerController = self;
     self.takeController.delegate = self;
+    self.takeController.allowsEditingPhoto = YES;
+    self.takeController.tabBar = self.tabBarController.tabBar;
+    
 	// Do any additional setup after loading the view.
 //    [self.emailTextField setText:@"default_email2@email.com"];
 //    [self.phoneTextField setText:@"98765431"];

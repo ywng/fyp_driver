@@ -43,6 +43,7 @@ static NSString * const kStringsTableName = @"FDTake";
 @synthesize popover = _popover;
 @synthesize viewControllerForPresentingImagePickerController = _viewControllerForPresenting;
 @synthesize popOverPresentRect = _popOverPresentRect;
+@synthesize tabBar;
 
 - (NSMutableArray *)sources
 {
@@ -198,6 +199,7 @@ static NSString * const kStringsTableName = @"FDTake";
         else {
             // On iPhone use full screen presentation.
             [[self presentingViewController] presentViewController:self.imagePicker animated:YES completion:nil];
+            
         }
     }
 }
@@ -302,6 +304,7 @@ static NSString * const kStringsTableName = @"FDTake";
         
         // If on iPad use the present rect and pop over style.
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            
             [self.actionSheet showFromRect:self.popOverPresentRect inView:[self presentingViewController].view animated:YES];
         }
         else if(self.tabBar) {
@@ -309,7 +312,13 @@ static NSString * const kStringsTableName = @"FDTake";
         }
         else {
             // Otherwise use iPhone style action sheet presentation.
-            [self.actionSheet showInView:[self presentingViewController].view];
+            //[self.actionSheet showInView:[self presentingViewController].view];
+            UIWindow* window = [[[UIApplication sharedApplication] delegate] window];
+            if ([window.subviews containsObject:[self presentingViewController].view]) {
+                [self.actionSheet  showInView:[self presentingViewController].view];
+            } else {
+                [self.actionSheet  showInView:window];
+            }
         }
     } else {
         NSString *str = [self textForButtonWithTitle:kNoSourcesKey];
