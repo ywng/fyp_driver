@@ -82,7 +82,7 @@
     }else if(indexPath.section==1){
         
     }else if(indexPath.section==2){
-        [[TaxiBookConnectionManager sharedManager] logoutPassengerWithCompletionHandler:^(id responseObject) {
+        [[TaxiBookConnectionManager sharedManager] logoutDriverWithCompletionHandler:^(id responseObject) {
             [SubView dismissAlert];
         }];
         [SubView loadingView:nil];

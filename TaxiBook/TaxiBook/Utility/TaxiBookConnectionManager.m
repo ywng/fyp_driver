@@ -347,7 +347,7 @@
     [self.normalRequestManager.operationQueue addOperation:operation];
 }
 
-- (void)logoutPassengerWithCompletionHandler:(void (^)(id responseObject))completionHandler
+- (void)logoutDriverWithCompletionHandler:(void (^)(id responseObject))completionHandler
 {
     NSLog(@"new logout request to server");
     
@@ -370,9 +370,9 @@
         [requestSerializer setValue:sessionToken forHTTPHeaderField:@"X-taxibook-session-token"];
     }
     [requestSerializer setValue:email forHTTPHeaderField:@"X-taxibook-email"];
-    [requestSerializer setValue:@"passenger" forHTTPHeaderField:@"X-taxibook-user-type"];
+    [requestSerializer setValue:@"driver" forHTTPHeaderField:@"X-taxibook-user-type"];
     
-    NSString *getUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/passenger/logout"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+    NSString *getUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/logout"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
     
     NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"GET" URLString:getUrl parameters:nil];
     
@@ -387,6 +387,7 @@
         [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeySessionToken];
         [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeySessionExpireTime];
         [[NSUserDefaults standardUserDefaults] setSecretInteger:-1 forKey:TaxiBookInternalKeyUserId];
+        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyLicenseNo];
         
         [[NSUserDefaults standardUserDefaults] synchronize];
         
@@ -404,6 +405,7 @@
         [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeySessionToken];
         [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeySessionExpireTime];
         [[NSUserDefaults standardUserDefaults] setSecretInteger:-1 forKey:TaxiBookInternalKeyUserId];
+          [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyLicenseNo];
         
         [[NSUserDefaults standardUserDefaults] synchronize];
         
@@ -422,7 +424,7 @@
         self.isLoggingIn = NO;
 //        __weak TaxiBookConnectionManager *weakSelf = self;
         [self.normalRequestManager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-            NSLog(@"internet status change %ld" ,status);
+            NSLog(@"internet status change %d" ,status);
             if (status == AFNetworkReachabilityStatusNotReachable || status == AFNetworkReachabilityStatusUnknown) {
                 // network not available
             }
