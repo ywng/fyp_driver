@@ -9,12 +9,41 @@
 #import "SettingViewController.h"
 #import "TaxiBookConnectionManager.h"
 #import "SubView.h"
+#import "SSKeychain/SSKeychain.h"
+#import "NSUserDefaults+SecureAdditions.h"
 
 @interface SettingViewController ()
 
 @end
 
+
+
 @implementation SettingViewController
+- (IBAction)update_avail:(id)sender {
+    NSString *avail;
+    if([self.availSwitch isOn]){
+        avail=@"1";
+    }else {
+         avail=@"0";
+    }
+    
+    TaxiBookConnectionManager *connection=[TaxiBookConnectionManager sharedManager];
+    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:
+                            avail, @"avail", nil];
+    
+    [connection postToUrl:@"/driver/set_avail/" withParameters:params
+                          success:^(AFHTTPRequestOperation *operation, id responseObject){
+                              [[NSUserDefaults standardUserDefaults] setSecretObject:avail forKey:TaxiBookInternalKeyAvailability];
+                          }
+                            failure:^(AFHTTPRequestOperation *operation, NSError *error){
+                                [SubView dismissAlert];
+                              
+                                [SubView showError:@"Fail to update availability, try again!" withTitle:@"Update Availability"];
+                                
+                                return;
+                          } loginIfNeed:YES];
+    
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -28,6 +57,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSString *avail = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyAvailability];
+    
+    if([avail isEqualToString:@"1"]){
+           [self.availSwitch setOn:YES animated:NO];
+    }else if ([avail isEqualToString:@"0"]){
+           [self.availSwitch setOn:NO animated:NO];
+    }
+    
+
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -81,7 +120,7 @@
         
     }else if(indexPath.section==1){
         
-    }else if(indexPath.section==2){
+    }else if(indexPath.section==3){
         [[TaxiBookConnectionManager sharedManager] logoutDriverWithCompletionHandler:^(id responseObject) {
             [SubView dismissAlert];
         }];

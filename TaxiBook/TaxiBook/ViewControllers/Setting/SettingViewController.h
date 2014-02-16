@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SettingViewController : UITableViewController
+@property (strong, nonatomic) IBOutlet UISwitch *availSwitch;
+
 
 @end

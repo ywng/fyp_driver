@@ -36,5 +36,6 @@ NSString const *TaxiBookInternalKeySessionExpireTime = @"com.taxibook.internal.u
 NSString const *TaxiBookInternalKeyLoggedIn = @"com.taxibook.internal.user.loggedIn";
 NSString const *TaxiBookInternalKeyLanguage = @"com.taxibook.internal.user.language";
 NSString const *TaxiBookInternalKeyLicenseNo=@"com.taxibook.internal.user.licenseNo";
+NSString const *TaxiBookInternalKeyAvailability=@"com.taxibook.internal.user.availability";
 
 @end

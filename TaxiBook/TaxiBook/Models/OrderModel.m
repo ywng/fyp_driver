@@ -48,7 +48,7 @@
     
     TaxiBookConnectionManager *manager = [TaxiBookConnectionManager sharedManager];
     
-    [manager getUrl:[NSString stringWithFormat:@"/passenger/active_trip/%lu/%lu", limit, offset] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager getUrl:[NSString stringWithFormat:@"/driver/active_trip/%lu/%lu", limit, offset] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"successfully download active orders");
         

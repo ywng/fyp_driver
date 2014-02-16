@@ -66,7 +66,7 @@
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:
                             [self.emailLbl text], @"email",
                             [self.passwordLbl text], @"password",
-                            @"passenger", @"user_type",nil];
+                            @"driver", @"user_type",nil];
 
     [connection loginwithParemeters:params
                             success:^(AFHTTPRequestOperation *operation, id responseObject){

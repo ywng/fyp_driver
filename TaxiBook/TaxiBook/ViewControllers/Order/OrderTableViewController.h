@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderModel.h"
 
-@interface OrderTableViewController : UITableViewController
+@interface OrderTableViewController : UITableViewController <OrderModelDelegate>
 
 @end

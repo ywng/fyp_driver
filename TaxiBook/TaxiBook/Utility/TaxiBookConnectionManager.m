@@ -193,7 +193,7 @@
         [requestSerializer setValue:sessionToken forHTTPHeaderField:@"X-taxibook-session-token"];
     }
     [requestSerializer setValue:email forHTTPHeaderField:@"X-taxibook-email"];
-    [requestSerializer setValue:@"passenger" forHTTPHeaderField:@"X-taxibook-user-type"];
+    [requestSerializer setValue:@"driver" forHTTPHeaderField:@"X-taxibook-user-type"];
     
     NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, relativeUrl] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
 
@@ -215,7 +215,7 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedOut object:nil];
                 return;
             }
-            parameters = @{@"email" : reLoginEmail, @"password" : password, @"user_type": @"passenger"};
+            parameters = @{@"email" : reLoginEmail, @"password" : password, @"user_type": @"driver"};
             
             [self loginwithParemeters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 // re-do the post method again
@@ -286,7 +286,7 @@
         [requestSerializer setValue:sessionToken forHTTPHeaderField:@"X-taxibook-session-token"];
     }
     [requestSerializer setValue:email forHTTPHeaderField:@"X-taxibook-email"];
-    [requestSerializer setValue:@"passenger" forHTTPHeaderField:@"X-taxibook-user-type"];
+    [requestSerializer setValue:@"driver" forHTTPHeaderField:@"X-taxibook-user-type"];
     
     NSString *getUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, relativeUrl] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
     
@@ -308,7 +308,7 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedOut object:nil];
                 return;
             }
-            parameters = @{@"email" : reLoginEmail, @"password" : password, @"user_type": @"passenger"};
+            parameters = @{@"email" : reLoginEmail, @"password" : password, @"user_type": @"driver"};
             
             [self loginwithParemeters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 // re-do the post method again

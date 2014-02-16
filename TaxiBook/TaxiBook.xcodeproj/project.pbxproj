@@ -46,6 +46,7 @@
 		ED02F20018AE571D00D6C6C3 /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED02F1FF18AE571D00D6C6C3 /* CustomNavigationController.m */; };
 		ED02F20518AE867C00D6C6C3 /* FDTakeController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED02F20418AE867C00D6C6C3 /* FDTakeController.m */; };
 		ED02F20718AE868B00D6C6C3 /* FDTake.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED02F20618AE868B00D6C6C3 /* FDTake.strings */; };
+		ED02F29518B0EC5000D6C6C3 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED02F29418B0EC5000D6C6C3 /* OrderDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,8 @@
 		ED02F20318AE867500D6C6C3 /* FDTakeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FDTakeController.h; sourceTree = "<group>"; };
 		ED02F20418AE867C00D6C6C3 /* FDTakeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDTakeController.m; sourceTree = "<group>"; };
 		ED02F20618AE868B00D6C6C3 /* FDTake.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = FDTake.strings; sourceTree = "<group>"; };
+		ED02F29318B0EC5000D6C6C3 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderDetailViewController.h; path = ViewControllers/Order/OrderDetailViewController.h; sourceTree = "<group>"; };
+		ED02F29418B0EC5000D6C6C3 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderDetailViewController.m; path = ViewControllers/Order/OrderDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,6 +336,8 @@
 			children = (
 				ED02F1FB18AE555C00D6C6C3 /* OrderTableViewController.m */,
 				ED02F1FA18AE555C00D6C6C3 /* OrderTableViewController.h */,
+				ED02F29318B0EC5000D6C6C3 /* OrderDetailViewController.h */,
+				ED02F29418B0EC5000D6C6C3 /* OrderDetailViewController.m */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -477,6 +482,7 @@
 				ED02F1EA18AE021100D6C6C3 /* WelcomeViewController.m in Sources */,
 				ED02F20018AE571D00D6C6C3 /* CustomNavigationController.m in Sources */,
 				771B68EB18A3DAB5001AF1EA /* OrderModel.m in Sources */,
+				ED02F29518B0EC5000D6C6C3 /* OrderDetailViewController.m in Sources */,
 				ED02F1FC18AE555C00D6C6C3 /* OrderTableViewController.m in Sources */,
 				771B68DB18A3DAA2001AF1EA /* MDDirectionService.m in Sources */,
 				ED02F1EF18AE021E00D6C6C3 /* LanguageSettingViewController.m in Sources */,
