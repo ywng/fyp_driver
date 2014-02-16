@@ -11,18 +11,18 @@
 
 @interface RegisterViewController : UIViewController <UITextFieldDelegate>
 @property FDTakeController *takeController;
-@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (strong, nonatomic) IBOutlet UITextField *emailTextField;
 
-@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
-@property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
+@property (strong, nonatomic) IBOutlet UITextField *phoneTextField;
+@property (strong, nonatomic) IBOutlet UITextField *firstNameTextField;
 
-@property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UITextField *retypePasswordTextField;
-@property (weak, nonatomic) IBOutlet UITextField *driverLicense;
+@property (strong, nonatomic) IBOutlet UITextField *lastNameTextField;
+@property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (strong, nonatomic) IBOutlet UITextField *retypePasswordTextField;
+@property (strong, nonatomic) IBOutlet UITextField *driverLicense;
 
-@property (weak, nonatomic) IBOutlet UIButton *uploadLicenseButton;
-@property (weak, nonatomic) IBOutlet UIImageView *selectedLicenseImageView;
+@property (strong, nonatomic) IBOutlet UIButton *uploadLicenseButton;
+@property (strong, nonatomic) IBOutlet UIImageView *selectedLicenseImageView;
 
 
 

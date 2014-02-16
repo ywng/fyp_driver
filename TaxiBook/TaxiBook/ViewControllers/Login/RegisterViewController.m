@@ -22,7 +22,7 @@
 
 - (IBAction)uploadLicenseButtonPressed:(id)sender {
     [self.takeController takePhotoOrChooseFromLibrary];
-    //self.takeController.allowsEditingPhoto = [(UISwitch *)sender isOn];
+    self.takeController.allowsEditingPhoto = false;
 }
 
 - (IBAction)registerButtonPressed:(id)sender {
@@ -63,6 +63,19 @@
         [SubView showError:@"Please ensure the password is typed correctly!" withTitle:@"Register Failed"];
         return;
     }
+    if (self.driverLicense.text.length > 0) {
+        [dict setObject:self.driverLicense.text forKey:@"license_no"];
+    }else{
+        [SubView showError:@"Please input driver license number!" withTitle:@"Register Failed"];
+        return;
+    }
+    
+    if (self.selectedLicenseImageView.image) {
+        
+    }else{
+        [SubView showError:@"Please upload a driver license photo!" withTitle:@"Register Failed"];
+        return;
+    }
     
     [self.emailTextField resignFirstResponder];
     [self.phoneTextField resignFirstResponder];
@@ -72,21 +85,21 @@
     
     TaxiBookConnectionManager *manager = [TaxiBookConnectionManager sharedManager];
     // [self setupLoadingView];
-    [manager registerPassenger:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager registerDriver:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         // get the pid
         NSLog(@"responseObject %@", responseObject);
         
-        NSInteger pid = [[responseObject objectForKey:@"pid"] integerValue];
+        NSInteger did = [[responseObject objectForKey:@"did"] integerValue];
         
         [[NSUserDefaults standardUserDefaults] setSecretObject:self.emailTextField.text forKey:TaxiBookInternalKeyEmail];
         [[NSUserDefaults standardUserDefaults] setSecretObject:self.firstNameTextField.text forKey:TaxiBookInternalKeyFirstName];
         [[NSUserDefaults standardUserDefaults] setSecretObject:self.lastNameTextField.text forKey:TaxiBookInternalKeyLastName];
-        [[NSUserDefaults standardUserDefaults] setSecretInteger:pid forKey:TaxiBookInternalKeyUserId];
+        [[NSUserDefaults standardUserDefaults] setSecretInteger:did forKey:TaxiBookInternalKeyUserId];
 
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        [manager loginwithParemeters:@{@"email": self.emailTextField.text, @"password": self.passwordTextField.text, @"user_type": @"passenger"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager loginwithParemeters:@{@"email": self.emailTextField.text, @"password": self.passwordTextField.text, @"user_type": @"driver",@"license_no":self.driverLicense.text} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedIn object:nil];
             [self dismissViewControllerAnimated:YES completion:nil];
             [SubView dismissAlert];

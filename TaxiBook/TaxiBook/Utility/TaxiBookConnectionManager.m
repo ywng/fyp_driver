@@ -67,11 +67,11 @@
 }
 
 
-- (void)registerPassenger:(NSDictionary *)formDataParameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+- (void)registerDriver:(NSDictionary *)formDataParameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     NSLog(@"new register request to server param: %@", formDataParameters);
     
-    NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/passenger/register/"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+    NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/register/"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
     
     [self.normalRequestManager POST:postUrl parameters:formDataParameters success:^(AFHTTPRequestOperation *operation, id responseObject){
         
@@ -99,7 +99,7 @@
     }
     
     [self setIsLoggingIn:YES];
-    NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/passenger/login/"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+    NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/login/"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
     
     [self.normalRequestManager POST:postUrl parameters:formDataParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"received login data from server");
@@ -116,15 +116,17 @@
             NSString *expireTime = [responseObject objectForKey:@"expire_time"];
             NSString *firstName = [responseObject objectForKey:@"first_name"];
             NSString *lastName = [responseObject objectForKey:@"last_name"];
-            NSInteger pid = [[responseObject objectForKey:@"pid"] integerValue];
+            NSInteger did = [[responseObject objectForKey:@"did"] integerValue];
             NSString *email = [responseObject objectForKey:@"email"];
+            NSString *licenseNo= [responseObject objectForKey:@"license_no"];
             
             [[NSUserDefaults standardUserDefaults] setSecretObject:email forKey:TaxiBookInternalKeyEmail];
+            [[NSUserDefaults standardUserDefaults] setSecretObject:licenseNo forKey:TaxiBookInternalKeyLicenseNo];
             [[NSUserDefaults standardUserDefaults] setSecretObject:firstName forKey:TaxiBookInternalKeyFirstName];
             [[NSUserDefaults standardUserDefaults] setSecretObject:lastName forKey:TaxiBookInternalKeyLastName];
             [[NSUserDefaults standardUserDefaults] setSecretObject:sessionToken forKey:TaxiBookInternalKeySessionToken];
             [[NSUserDefaults standardUserDefaults] setSecretObject:expireTime forKey:TaxiBookInternalKeySessionExpireTime];
-            [[NSUserDefaults standardUserDefaults] setSecretInteger:pid forKey:TaxiBookInternalKeyUserId];
+            [[NSUserDefaults standardUserDefaults] setSecretInteger:did forKey:TaxiBookInternalKeyUserId];
             [[NSUserDefaults standardUserDefaults] setSecretBool:YES forKey:TaxiBookInternalKeyLoggedIn];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
