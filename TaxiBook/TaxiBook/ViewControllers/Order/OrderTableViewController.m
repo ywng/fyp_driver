@@ -46,18 +46,6 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
     [self.refreshControl beginRefreshing];
     [self.orderModel downloadActiveOrders];
     
-    TaxiBookConnectionManager *manager = [TaxiBookConnectionManager sharedManager];
-    [manager getUrl:[NSString stringWithFormat:@"/driver/get_avail"] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSLog(@"successfully get driver availability");
-        
-        NSString *avail = [responseObject objectForKey:@"avail"];
-         [[NSUserDefaults standardUserDefaults] setSecretObject:avail forKey:TaxiBookInternalKeyAvailability];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"fail to get driver availability %@", error);
-        
-    } loginIfNeed:YES];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

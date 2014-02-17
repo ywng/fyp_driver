@@ -119,6 +119,7 @@
             NSInteger did = [[responseObject objectForKey:@"did"] integerValue];
             NSString *email = [responseObject objectForKey:@"email"];
             NSString *licenseNo= [responseObject objectForKey:@"license_no"];
+            NSString *avail= [responseObject objectForKey:@"is_available"];
             
             [[NSUserDefaults standardUserDefaults] setSecretObject:email forKey:TaxiBookInternalKeyEmail];
             [[NSUserDefaults standardUserDefaults] setSecretObject:licenseNo forKey:TaxiBookInternalKeyLicenseNo];
@@ -126,9 +127,11 @@
             [[NSUserDefaults standardUserDefaults] setSecretObject:lastName forKey:TaxiBookInternalKeyLastName];
             [[NSUserDefaults standardUserDefaults] setSecretObject:sessionToken forKey:TaxiBookInternalKeySessionToken];
             [[NSUserDefaults standardUserDefaults] setSecretObject:expireTime forKey:TaxiBookInternalKeySessionExpireTime];
+             [[NSUserDefaults standardUserDefaults] setSecretObject:avail forKey:TaxiBookInternalKeyAvailability];
             [[NSUserDefaults standardUserDefaults] setSecretInteger:did forKey:TaxiBookInternalKeyUserId];
             [[NSUserDefaults standardUserDefaults] setSecretBool:YES forKey:TaxiBookInternalKeyLoggedIn];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            
             
             NSString *password = [formDataParameters objectForKey:@"password"];
             if (password) {

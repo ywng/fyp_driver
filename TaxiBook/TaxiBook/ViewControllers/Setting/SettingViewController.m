@@ -34,6 +34,7 @@
     [connection postToUrl:@"/driver/set_avail/" withParameters:params
                           success:^(AFHTTPRequestOperation *operation, id responseObject){
                               [[NSUserDefaults standardUserDefaults] setSecretObject:avail forKey:TaxiBookInternalKeyAvailability];
+                              [SubView dismissAlert];
                           }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error){
                                 [SubView dismissAlert];
@@ -42,6 +43,7 @@
                                 
                                 return;
                           } loginIfNeed:YES];
+    [SubView loadingView:nil];
     
 }
 

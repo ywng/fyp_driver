@@ -279,7 +279,7 @@
             </objects>
             <point key="canvasLocation" x="-508" y="-1387"/>
         </scene>
-        <!--View Controller-->
+        <!--View Controller - Profile-->
         <scene sceneID="2Cr-ld-viu">
             <objects>
                 <viewController id="OY4-5V-8qH" sceneMemberID="viewController">
@@ -292,13 +292,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="DKg-Xi-DBb"/>
+                    <navigationItem key="navigationItem" title="Profile" id="DKg-Xi-DBb"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GQ8-6K-Yz6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="95" y="-75"/>
         </scene>
-        <!--Order Table View Controller-->
+        <!--Order Table View Controller - Orders-->
         <scene sceneID="v6V-kW-QVo">
             <objects>
                 <tableViewController id="FlH-3A-00w" customClass="OrderTableViewController" sceneMemberID="viewController">
@@ -337,7 +337,7 @@
                             <outlet property="delegate" destination="FlH-3A-00w" id="FSO-se-Y52"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Hg9-UX-UJt"/>
+                    <navigationItem key="navigationItem" title="Orders" id="Hg9-UX-UJt"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="oEo-x8-jRU">
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
