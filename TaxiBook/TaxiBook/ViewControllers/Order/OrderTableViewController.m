@@ -40,11 +40,15 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.refreshControl beginRefreshing];
-    [self.orderModel downloadActiveOrders];
+    //[self.refreshControl beginRefreshing];
+   // [self.orderModel downloadActiveOrders];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLoadOrderNotification:) name:TaxiBookNotificationUserLoadOrderData object:nil];
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLogoutNotification:) name:TaxiBookNotificationUserLoggedOut object:nil];
     
 
     // Uncomment the following line to preserve selection between presentations.
@@ -53,6 +57,23 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+- (void)receivedLoadOrderNotification:(NSNotification *)notification
+{
+    NSLog(@"in load order data notification");
+    //every time login refresh the order list, other occasions, use refresh by scrolling down or trigger by other notification
+    [self.refreshControl beginRefreshing];
+    [self.orderModel downloadActiveOrders];
+}
+
+- (void)receivedLogoutNotification:(NSNotification *)notification
+{
+    NSLog(@"in logout notification");
+    [self.orderModel clearData];
+    [self.tableView reloadData];
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {

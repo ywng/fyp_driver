@@ -9,6 +9,7 @@
 #import "SignInViewController.h"
 #import <NSUserDefaults+SecureAdditions.h>
 #import "SubView.h"
+#import "OrderTableViewController.h"
 
 @interface SignInViewController ()
 
@@ -30,7 +31,7 @@
 {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]]];
+   // [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]]];
 	// Do any additional setup after loading the view.
 }
 
@@ -70,9 +71,9 @@
 
     [connection loginwithParemeters:params
                             success:^(AFHTTPRequestOperation *operation, id responseObject){
-                                
+                                //the notification is already included in login request
+                               // [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedIn object:nil];
                                 [SubView dismissAlert];
-                                [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedIn object:nil];
                                 [self dismissViewControllerAnimated:YES completion:nil];
                             }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error){

@@ -40,6 +40,8 @@
     NSLog(@"Logged in? %d", loggedIn);
     if (!loggedIn) {
       [self performSegueWithIdentifier:@"welcomeModal" sender:self];
+    }else{
+      [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoadOrderData object:nil];
     }
     
 }

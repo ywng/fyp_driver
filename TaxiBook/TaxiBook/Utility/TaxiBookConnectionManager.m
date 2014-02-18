@@ -139,6 +139,7 @@
             }
             
             [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedIn object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoadOrderData object:nil];
             
             success(operation, responseObject);
             for (NSInteger index = [self.waitForProcessQueue count] - 1; index >= 0; index -- ) {

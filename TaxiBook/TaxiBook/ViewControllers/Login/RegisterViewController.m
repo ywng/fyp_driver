@@ -11,6 +11,7 @@
 #import <NSUserDefaults+SecureAdditions.h>
 #import "SubView.h"
 #import "FDTakeController.h"
+#import "OrderTableViewController.h"
 
 @interface RegisterViewController ()<FDTakeDelegate>
 
@@ -100,7 +101,8 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [manager loginwithParemeters:@{@"email": self.emailTextField.text, @"password": self.passwordTextField.text, @"user_type": @"driver",@"license_no":self.driverLicense.text} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedIn object:nil];
+            //the notification is already included in login request
+            //[[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedIn object:nil];
             [self dismissViewControllerAnimated:YES completion:nil];
             [SubView dismissAlert];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -169,7 +171,7 @@
 {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]]];
+   // [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]]];
     self.takeController = [[FDTakeController alloc] init];
     self.takeController.viewControllerForPresentingImagePickerController = self;
     self.takeController.delegate = self;
@@ -224,5 +226,6 @@
     [self setSelectedLicenseImageView:nil];
     [super viewDidUnload];
 }
+
 
 @end

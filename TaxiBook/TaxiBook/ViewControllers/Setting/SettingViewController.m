@@ -40,6 +40,11 @@
                                 [SubView dismissAlert];
                               
                                 [SubView showError:@"Fail to update availability, try again!" withTitle:@"Update Availability"];
+                                if([self.availSwitch isOn]){
+                                    [self.availSwitch setOn:NO animated:NO];
+                                }else {
+                                    [self.availSwitch setOn:YES animated:NO];
+                                }
                                 
                                 return;
                           } loginIfNeed:YES];
@@ -125,6 +130,7 @@
     }else if(indexPath.section==3){
         [[TaxiBookConnectionManager sharedManager] logoutDriverWithCompletionHandler:^(id responseObject) {
             [SubView dismissAlert];
+        
         }];
         [SubView loadingView:nil];
         
