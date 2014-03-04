@@ -67,13 +67,17 @@
 }
 
 
-- (void)registerDriver:(NSDictionary *)formDataParameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+- (void)registerDriver:(NSDictionary *)formDataParameters image: (UIImage*) image success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     NSLog(@"new register request to server param: %@", formDataParameters);
     
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    
     NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/register/"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
     
-    [self.normalRequestManager POST:postUrl parameters:formDataParameters success:^(AFHTTPRequestOperation *operation, id responseObject){
+    [self.imageRequestManager POST:postUrl parameters:formDataParameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:imageData name:@"userfile" fileName:@"userfile" mimeType:@"image/jpeg"];
+    } success:^(AFHTTPRequestOperation *operation, id responseObject){
         
         NSNumber *responseStatusCode = [responseObject objectForKey:@"status_code"];
         
@@ -139,7 +143,7 @@
             }
             
             [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedIn object:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoadOrderData object:nil];
+           // [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoadOrderData object:nil];
             
             success(operation, responseObject);
             for (NSInteger index = [self.waitForProcessQueue count] - 1; index >= 0; index -- ) {

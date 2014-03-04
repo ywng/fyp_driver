@@ -23,6 +23,7 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *uploadLicenseButton;
 @property (strong, nonatomic) IBOutlet UIImageView *selectedLicenseImageView;
+@property (strong, nonatomic) UIImage *licenseImage;
 
 
 

@@ -86,7 +86,8 @@
     
     TaxiBookConnectionManager *manager = [TaxiBookConnectionManager sharedManager];
     // [self setupLoadingView];
-    [manager registerDriver:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+ 
+    [manager registerDriver:dict image:self.licenseImage success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         // get the pid
         NSLog(@"responseObject %@", responseObject);
@@ -220,6 +221,7 @@
 - (void)takeController:(FDTakeController *)controller gotPhoto:(UIImage *)photo withInfo:(NSDictionary *)info
 {
     [self.selectedLicenseImageView setImage:photo];
+    self.licenseImage=photo;
 }
 
 - (void)viewDidUnload {
