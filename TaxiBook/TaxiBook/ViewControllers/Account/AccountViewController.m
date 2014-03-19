@@ -142,22 +142,23 @@
     }
     
     if (self.lastNameTextField.text.length>0) {
-        if (self.firstNameTextField.text.length>0) {
-            [param setObject:@(1) forKey:@"name_flag"];
+        [param setObject:@(1) forKey:@"last_name_flag"];
+        [param setObject:self.lastNameTextField.text forKey:@"last_name"];
+    }
+    else {
+        [param setObject:@(0) forKey:@"last_name_flag"];
+        NSLog(@"No last name");
+        [SubView showError:@"Please input your last name" withTitle:@"Update Failed"];
+        return;
+    }
+    if (self.firstNameTextField.text.length>0) {
+            [param setObject:@(1) forKey:@"first_name_flag"];
             [param setObject:self.firstNameTextField.text forKey:@"first_name"];
-            [param setObject:self.lastNameTextField.text forKey:@"last_name"];
-        }
-        else {
-            [param setObject:@(0) forKey:@"name_flag"];
-            NSLog(@"No first name");
-            [SubView showError:@"Please input your first name" withTitle:@"Update Failed"];
-            return;
-        }
     }
     else {
         [param setObject:@(0) forKey:@"name_flag"];
-        NSLog(@"No last name");
-        [SubView showError:@"Please input your last name" withTitle:@"Update Failed"];
+        NSLog(@"No first name");
+        [SubView showError:@"Please input your first name" withTitle:@"Update Failed"];
         return;
     }
     
