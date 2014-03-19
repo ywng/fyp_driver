@@ -33,6 +33,7 @@
 		771B68EE18A3DAB5001AF1EA /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 771B68E818A3DAB5001AF1EA /* Order.m */; };
 		771B68EF18A3DAB5001AF1EA /* TaxiBookGPS.m in Sources */ = {isa = PBXBuildFile; fileRef = 771B68EA18A3DAB5001AF1EA /* TaxiBookGPS.m */; };
 		8E27BDF5610F4828BF277B6E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 782FD4AD354D441EAF27DDB2 /* libPods.a */; };
+		EAF165A318D83D8E001422E7 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF165A218D83D8E001422E7 /* AccountViewController.m */; };
 		ED02F1D418ADFD2F00D6C6C3 /* DriverDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED02F1D018ADFD2F00D6C6C3 /* DriverDetailViewController.m */; };
 		ED02F1D518ADFD2F00D6C6C3 /* DriverMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED02F1D218ADFD2F00D6C6C3 /* DriverMasterViewController.m */; };
 		ED02F1DF18ADFF6100D6C6C3 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED02F1DE18ADFF6100D6C6C3 /* TabBarViewController.m */; };
@@ -100,6 +101,8 @@
 		771B68EA18A3DAB5001AF1EA /* TaxiBookGPS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookGPS.m; sourceTree = "<group>"; };
 		782FD4AD354D441EAF27DDB2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8022F0ADFCE5467192DFB5B6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		EAF165A118D83D8E001422E7 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
+		EAF165A218D83D8E001422E7 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
 		ED02F1CF18ADFD2F00D6C6C3 /* DriverDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DriverDetailViewController.h; path = ViewControllers/DriverDetailViewController.h; sourceTree = "<group>"; };
 		ED02F1D018ADFD2F00D6C6C3 /* DriverDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DriverDetailViewController.m; path = ViewControllers/DriverDetailViewController.m; sourceTree = "<group>"; };
 		ED02F1D118ADFD2F00D6C6C3 /* DriverMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DriverMasterViewController.h; path = ViewControllers/DriverMasterViewController.h; sourceTree = "<group>"; };
@@ -279,9 +282,20 @@
 			path = Unit;
 			sourceTree = "<group>";
 		};
+		EAF165A418D83D93001422E7 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				EAF165A118D83D8E001422E7 /* AccountViewController.h */,
+				EAF165A218D83D8E001422E7 /* AccountViewController.m */,
+			);
+			name = Account;
+			path = ViewControllers/Account;
+			sourceTree = "<group>";
+		};
 		ED02F1CC18ADFC5300D6C6C3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				EAF165A418D83D93001422E7 /* Account */,
 				ED02F1FD18AE556100D6C6C3 /* Order */,
 				ED02F1E118AE01F000D6C6C3 /* Setting */,
 				ED02F1E018AE01DD00D6C6C3 /* Login */,
@@ -488,6 +502,7 @@
 				ED02F1EF18AE021E00D6C6C3 /* LanguageSettingViewController.m in Sources */,
 				771B68EC18A3DAB5001AF1EA /* Driver.m in Sources */,
 				771B68ED18A3DAB5001AF1EA /* GMPlace.m in Sources */,
+				EAF165A318D83D8E001422E7 /* AccountViewController.m in Sources */,
 				771B68DD18A3DAA2001AF1EA /* TaxiBookErrorSet.m in Sources */,
 				ED02F1D418ADFD2F00D6C6C3 /* DriverDetailViewController.m in Sources */,
 				771B68EE18A3DAB5001AF1EA /* Order.m in Sources */,
