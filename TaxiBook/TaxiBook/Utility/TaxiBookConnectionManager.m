@@ -76,7 +76,7 @@
     NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/register/"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
     
     [self.imageRequestManager POST:postUrl parameters:formDataParameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:imageData name:@"userfile" fileName:@"userfile" mimeType:@"image/jpeg"];
+        [formData appendPartWithFileData:imageData name:@"userfile" fileName:@"userfile.jpg" mimeType:@"image/jpeg"];
     } success:^(AFHTTPRequestOperation *operation, id responseObject){
         
         NSNumber *responseStatusCode = [responseObject objectForKey:@"status_code"];
