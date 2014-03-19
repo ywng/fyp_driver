@@ -121,6 +121,7 @@
             NSString *firstName = [responseObject objectForKey:@"first_name"];
             NSString *lastName = [responseObject objectForKey:@"last_name"];
             NSInteger did = [[responseObject objectForKey:@"did"] integerValue];
+            NSString *phoneNumber = [responseObject objectForKey:@"phone_no"];
             NSString *email = [responseObject objectForKey:@"email"];
             NSString *licenseNo= [responseObject objectForKey:@"license_no"];
             NSString *avail= [responseObject objectForKey:@"is_available"];
@@ -132,6 +133,7 @@
             [[NSUserDefaults standardUserDefaults] setSecretObject:sessionToken forKey:TaxiBookInternalKeySessionToken];
             [[NSUserDefaults standardUserDefaults] setSecretObject:expireTime forKey:TaxiBookInternalKeySessionExpireTime];
              [[NSUserDefaults standardUserDefaults] setSecretObject:avail forKey:TaxiBookInternalKeyAvailability];
+            [[NSUserDefaults standardUserDefaults] setSecretObject:phoneNumber forKey:TaxiBookInternalKeyPhone];
             [[NSUserDefaults standardUserDefaults] setSecretInteger:did forKey:TaxiBookInternalKeyUserId];
             [[NSUserDefaults standardUserDefaults] setSecretBool:YES forKey:TaxiBookInternalKeyLoggedIn];
             [[NSUserDefaults standardUserDefaults] synchronize];
