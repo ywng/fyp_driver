@@ -23,7 +23,7 @@
     NSString *avail;
     if([self.availSwitch isOn]){
         avail=@"1";
-    }else {
+    } else {
          avail=@"0";
     }
     
