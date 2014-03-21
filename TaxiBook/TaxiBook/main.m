@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "driverAppDelegate.h"
+#import "DriverAppDelegate.h"
 
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([driverAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([DriverAppDelegate class]));
     }
 }
