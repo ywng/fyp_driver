@@ -74,7 +74,7 @@
 		650B368E1808F72A0029A086 /* DriverAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DriverAppDelegate.m; sourceTree = "<group>"; };
 		650B36911808F72A0029A086 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		650B369C1808F72A0029A086 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		650B36A21808F72A0029A086 /* TaxiBookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaxiBookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		650B36A21808F72A0029A086 /* TaxibookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaxibookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		650B36A31808F72A0029A086 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		650B36AC1808F72B0029A086 /* TaxiBookTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TaxiBookTests-Info.plist"; sourceTree = "<group>"; };
 		650B36AE1808F72B0029A086 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				650B36791808F72A0029A086 /* Taxibook.app */,
-				650B36A21808F72A0029A086 /* TaxiBookTests.xctest */,
+				650B36A21808F72A0029A086 /* TaxibookTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -393,7 +393,7 @@
 			);
 			name = TaxibookTests;
 			productName = TaxiBookTests;
-			productReference = 650B36A21808F72A0029A086 /* TaxiBookTests.xctest */;
+			productReference = 650B36A21808F72A0029A086 /* TaxibookTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
