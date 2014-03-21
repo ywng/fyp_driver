@@ -23,7 +23,7 @@
     NSString *avail;
     if([self.availSwitch isOn]){
         avail=@"1";
-    }else {
+    } else {
          avail=@"0";
     }
     
@@ -127,7 +127,7 @@
         
     }else if(indexPath.section==1){
         
-    }else if(indexPath.section==3){
+    }else if(indexPath.section==2){
         [[TaxiBookConnectionManager sharedManager] logoutDriverWithCompletionHandler:^(id responseObject) {
             [SubView dismissAlert];
         

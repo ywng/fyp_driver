@@ -96,6 +96,7 @@
 - (void)doneButtonPressed:(id)sender
 {
     NSLog(@"done button pressed");
+    [SubView loadingView:nil];
     [self.firstNameTextField resignFirstResponder];
     [self.lastNameTextField resignFirstResponder];
     [self.phoneNumberTextField resignFirstResponder];
@@ -176,9 +177,11 @@
             [[NSUserDefaults standardUserDefaults] setSecretObject:self.lastNameTextField.text forKey:TaxiBookInternalKeyLastName];
             [[NSUserDefaults standardUserDefaults] setSecretObject:self.phoneNumberTextField.text forKey:TaxiBookInternalKeyPhone];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            [SubView dismissAlert];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [SubView dismissAlert];
         NSData *dataFromServer = operation.responseData;
         
         NSString *stringFromServer = [[NSString alloc] initWithData:dataFromServer encoding:NSUTF8StringEncoding];
@@ -196,6 +199,7 @@
 
 -(IBAction) isAvailableSwitchValueChanged{
     NSLog(@"isAvailableSwitchValueChanged");
+    [SubView loadingView:nil];
     
     NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithCapacity:1];
     
@@ -222,9 +226,14 @@
                 [[NSUserDefaults standardUserDefaults] setSecretObject:@"0" forKey:TaxiBookInternalKeyAvailability];
             
             [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            [SubView dismissAlert];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [SubView dismissAlert];
+        
         NSData *dataFromServer = operation.responseData;
         
         NSString *stringFromServer = [[NSString alloc] initWithData:dataFromServer encoding:NSUTF8StringEncoding];
@@ -235,6 +244,7 @@
         [alertView show];
         
     } loginIfNeed:YES];
+    
 
 }
 
