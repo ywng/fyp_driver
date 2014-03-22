@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    UIColor *barColor=[UIColor colorWithRed:225.0f/255.0f green:150.0f/255.0f blue:0.0f/255.0f alpha:1.0f];
+    UIColor *barColor=[UIColor colorWithRed:48.0f/255.0f green:81.0f/255.0f blue:148.0f/255.0f alpha:1.0f];
     self.navigationBar.barTintColor = barColor;
     self.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};

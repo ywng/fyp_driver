@@ -430,7 +430,7 @@
 - (id)init
 {
     if (self = [super init]) {
-        self.serverDomain = @"http://taxibook.site50.net/server/index.php/";
+        self.serverDomain = @"http://ec2-54-255-141-218.ap-southeast-1.compute.amazonaws.com/index.php/";
         self.isLoggingIn = NO;
 //        __weak TaxiBookConnectionManager *weakSelf = self;
         [self.normalRequestManager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
