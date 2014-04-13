@@ -87,6 +87,11 @@
         
         Order *order = [Order newInstanceFromServerData:jsonData];
         
+        jsonData = [responseObject objectForKey:@"passenger"];
+        if (jsonData) {
+            order.confirmedPassenger = [Passenger newInstanceFromServerData:jsonData];
+        }
+        
         jsonData = [responseObject objectForKey:@"driver"];
         if (jsonData) {
             order.confirmedDriver = [Driver newInstanceFromServerData:jsonData];

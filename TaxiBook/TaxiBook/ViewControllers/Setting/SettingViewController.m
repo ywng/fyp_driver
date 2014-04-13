@@ -20,11 +20,11 @@
 
 @implementation SettingViewController
 - (IBAction)update_avail:(id)sender {
-    NSString *avail;
+    NSNumber *avail;
     if([self.availSwitch isOn]){
-        avail=@"1";
+        avail = @(1);
     } else {
-         avail=@"0";
+        avail = @(0);
     }
     
     TaxiBookConnectionManager *connection=[TaxiBookConnectionManager sharedManager];
@@ -33,7 +33,7 @@
     
     [connection postToUrl:@"/driver/set_avail/" withParameters:params
                           success:^(AFHTTPRequestOperation *operation, id responseObject){
-                              [[NSUserDefaults standardUserDefaults] setSecretObject:avail forKey:TaxiBookInternalKeyAvailability];
+                              [[NSUserDefaults standardUserDefaults] setSecretBool:[avail boolValue] forKey:TaxiBookInternalKeyAvailability];
                               [SubView dismissAlert];
                           }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error){
@@ -42,7 +42,7 @@
                                 [SubView showError:@"Fail to update availability, try again!" withTitle:@"Update Availability"];
                                 if([self.availSwitch isOn]){
                                     [self.availSwitch setOn:NO animated:NO];
-                                }else {
+                                } else {
                                     [self.availSwitch setOn:YES animated:NO];
                                 }
                                 
@@ -65,16 +65,14 @@
 {
     [super viewDidLoad];
     
-    NSString *avail = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyAvailability];
-    
-    if([avail isEqualToString:@"1"]){
-           [self.availSwitch setOn:YES animated:NO];
-    }else if ([avail isEqualToString:@"0"]){
-           [self.availSwitch setOn:NO animated:NO];
+    BOOL avail = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyAvailability];
+
+    if (avail) {
+        [self.availSwitch setOn:YES];
+    } else {
+        [self.availSwitch setOn:NO];
     }
     
-
-
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  

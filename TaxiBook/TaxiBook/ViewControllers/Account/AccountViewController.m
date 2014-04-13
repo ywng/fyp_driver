@@ -38,12 +38,12 @@
     NSString *lastName = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyLastName];
     NSString *email = [[NSUserDefaults standardUserDefaults]secretStringForKey:TaxiBookInternalKeyEmail];
     NSString *phoneNumber = [[NSUserDefaults standardUserDefaults]secretStringForKey:TaxiBookInternalKeyPhone];
-    NSString *isAvailable = [[NSUserDefaults standardUserDefaults]secretStringForKey:TaxiBookInternalKeyAvailability];
+    BOOL *isAvailable = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyAvailability];
     self.firstNameTextField.text = firstName;
     self.lastNameTextField.text = lastName;
     self.emailLabel.text = email;
     self.phoneNumberTextField.text = phoneNumber;
-    if ([isAvailable  isEqual: @"1"])
+    if (isAvailable)
         [self.isAvailableSwitch setOn:(YES)];
     else
         [self.isAvailableSwitch setOn:(NO)];
@@ -220,11 +220,12 @@
         if (statusCode == 1) {
             // success
             
-            if (self.isAvailableSwitch.isOn)
-                [[NSUserDefaults standardUserDefaults] setSecretObject:@"1" forKey:TaxiBookInternalKeyAvailability];
-            else
-                [[NSUserDefaults standardUserDefaults] setSecretObject:@"0" forKey:TaxiBookInternalKeyAvailability];
-            
+            if (self.isAvailableSwitch.isOn) {
+                [[NSUserDefaults standardUserDefaults] setSecretBool:YES forKey:TaxiBookInternalKeyAvailability];
+                [[NSNotificationCenter defaultCenter] postNotificationName:TaxibookNotificationDriverStartWorking object:nil];
+            } else {
+                [[NSUserDefaults standardUserDefaults] setSecretBool:NO forKey:TaxiBookInternalKeyAvailability];
+            }
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             [SubView dismissAlert];
