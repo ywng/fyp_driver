@@ -38,6 +38,7 @@ NSString const *TaxiBookInternalKeyLoggedIn = @"com.taxibook.internal.user.logge
 NSString const *TaxiBookInternalKeyLanguage = @"com.taxibook.internal.user.language";
 NSString const *TaxiBookInternalKeyLicenseNo=@"com.taxibook.internal.user.licenseNo";
 NSString const *TaxiBookInternalKeyAvailability=@"com.taxibook.internal.user.availability";
+NSString const *TaxiBookInternalKeyAPNSToken = @"com.taxibook.internal.user.apnstoken";
 
 
 @end
