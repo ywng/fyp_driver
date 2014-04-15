@@ -217,7 +217,6 @@
     
     NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, relativeUrl] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
 
-    
     NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"POST" URLString:postUrl parameters:formDataParameters];
     
     AFHTTPRequestOperation *operation = [self.normalRequestManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {

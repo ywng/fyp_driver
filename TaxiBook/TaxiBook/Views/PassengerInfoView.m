@@ -31,7 +31,7 @@
 
 - (void)updateInfo:(Passenger *)passenger orderStatus:(OrderStatus)orderStatus
 {
-    [self.taxiStatusUpdateButton setTitle:[Order orderStatusToString:orderStatus] forState:UIControlStateNormal];
+    [self.taxiStatusUpdateButton setTitle:[Order driverStatusUpdateToString:orderStatus] forState:UIControlStateNormal];
     
     if (!passenger) {
         [self.passengerNameLabel setText:@"Waiting for passenger"];
@@ -44,6 +44,11 @@
     
 }
 
+- (IBAction)didPressedUpdateStatusButton:(id)sender {
+    if (self.delegate && [self.delegate conformsToProtocol:@protocol(PassengerInfoViewDelegate)]) {
+        [self.delegate driverDidPressUpdateStatusButton];
+    }
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

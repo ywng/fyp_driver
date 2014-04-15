@@ -12,7 +12,7 @@
 #import "PassengerProfileView.h"
 #import "OrderModel.h"
 
-@interface OrderDetailViewController : UIViewController <OrderModelDelegate, GMSMapViewDelegate, PassengerProfileViewDelegate>
+@interface OrderDetailViewController : UIViewController <OrderModelDelegate, GMSMapViewDelegate, PassengerProfileViewDelegate, PassengerInfoViewDelegate>
 
 @property (weak, nonatomic) Order *displayOrder;
 
