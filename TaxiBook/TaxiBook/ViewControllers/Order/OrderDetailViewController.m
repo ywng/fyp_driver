@@ -420,46 +420,7 @@
             }
         }
             break;
-        case OrderStatusDriverComing:
-        {
-            if (self.previousOrderStatus != self.displayOrder.orderStatus) {
-                
-                /* top bar config */
-                NSTimeInterval timeDiff = [self.displayOrder.orderTime timeIntervalSinceNow];
-                if (timeDiff < 0) {
-                    timeDiff = 0;
-                }
-                [self setupTopBarWithColor:[UIColor colorWithRed:60.0/255 green:188.0/255 blue:1 alpha:1] withString:[NSString stringWithFormat:@"Pickup time %ld hr %ld min remaining", (long)timeDiff/3600, ((long)timeDiff%3600)/60] spinnerNeed:NO];
-                
-                /* bottom view config */
-                [self setupBottomBarPassengerInfoView];
-            }
-        }
-            break;
-        case OrderStatusDriverWaiting:
-        {
-            if (self.previousOrderStatus != self.displayOrder.orderStatus) {
-                
-                /* top bar config */
-                [self setupTopBarWithColor:[UIColor colorWithRed:0 green:237.0/255 blue:88.0/255 alpha:1] withString:[NSString stringWithFormat:@"Destination: %@", self.displayOrder.toGPS.streetDescription] spinnerNeed:NO];
-                
-                /* bottom view config */
-                [self setupBottomBarPassengerInfoView];
-            }
-        }
-            break;
-        case OrderStatusDriverPickedUp:
-        {
-            if (self.previousOrderStatus != self.displayOrder.orderStatus) {
-                
-                /* top bar config */
-                [self setupTopBarWithColor:[UIColor colorWithRed:0 green:237.0/255 blue:88.0/255 alpha:1] withString:[NSString stringWithFormat:@"Destination: %@", self.displayOrder.toGPS.streetDescription] spinnerNeed:NO];
-                
-                /* bottom view config */
-                [self setupBottomBarPassengerInfoView];
-            }
-        }
-            break;
+
         case OrderStatusOrderFinished:
         {
             if (self.previousOrderStatus != self.displayOrder.orderStatus) {
@@ -513,6 +474,7 @@
         [self.passengerInfoView setFrame:CGRectMake(0, 0, 320, 100)];
         [self.bottomContainerView addSubview:self.passengerInfoView];
         [self.passengerInfoView updateInfo:self.displayOrder.confirmedPassenger orderStatus:self.displayOrder.orderStatus];
+        self.passengerInfoView.delegate = self;
     } else {
         [self.passengerInfoView updateInfo:self.displayOrder.confirmedPassenger orderStatus:self.displayOrder.orderStatus];
     }
@@ -548,9 +510,9 @@
     }
 }
 
-#pragma mark - DriverProfileViewDelegate
+#pragma mark - PassengerProfileViewDelegate
 
-- (void)driverProfilePicFinishLoading
+- (void)passengerProfilePicFinishLoading
 {
     if (self.fromMarker && self.googleMapView.selectedMarker == self.fromMarker) {
         self.googleMapView.selectedMarker = nil;
@@ -559,6 +521,34 @@
     }
 }
 
+#pragma mark - PassengerInfoViewDelegate
+
+- (void)driverDidPressUpdateStatusButton
+{
+    // current status
+    OrderStatus status = self.displayOrder.orderStatus;
+    TaxiBookConnectionManager *manager = [TaxiBookConnectionManager sharedManager];
+    
+    NSString *postUrl = nil;
+    
+    switch (status) {
+        case OrderStatusCustomerConfirmed: {
+            postUrl = @"/trip/confirm_finish/";
+        }
+            break;
+        default:
+            break;
+    }
+    if (postUrl) {
+        [manager postToUrl:postUrl withParameters:@{@"oid": @(self.displayOrder.orderId), @"actual_price": @(self.displayOrder.estimatedPrice)} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [SubView loadingView:nil];
+            [self updateDisplayOrder];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSString *str = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
+            NSLog(@"error in updating status: %@", str);
+        } loginIfNeed:YES];
+    }
+}
 
 
 @end

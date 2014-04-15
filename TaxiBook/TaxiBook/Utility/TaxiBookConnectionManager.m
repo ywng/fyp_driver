@@ -73,7 +73,7 @@
     
     NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
     
-    NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/register/"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/register/"];
     
     [self.imageRequestManager POST:postUrl parameters:formDataParameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:imageData name:@"userfile" fileName:@"userfile.jpg" mimeType:@"image/jpeg"];
@@ -97,7 +97,7 @@
     
     NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
     
-    NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/edit_profile_pic/"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/edit_profile_pic/"];
     
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     
@@ -161,7 +161,7 @@
     }
     
     [self setIsLoggingIn:YES];
-    NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/login/"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/login/"];
     
     [self.normalRequestManager POST:postUrl parameters:formDataParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"received login data from server");
@@ -283,9 +283,8 @@
     [requestSerializer setValue:email forHTTPHeaderField:@"X-taxibook-email"];
     [requestSerializer setValue:@"driver" forHTTPHeaderField:@"X-taxibook-user-type"];
     
-    NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, relativeUrl] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@", self.serverDomain, relativeUrl];
 
-    
     NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"POST" URLString:postUrl parameters:formDataParameters];
     
     AFHTTPRequestOperation *operation = [self.normalRequestManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -337,7 +336,7 @@
         if ([error.domain isEqualToString:TaxiBookServiceName]) {
             NSLog(@"received error from server %@ %@", relativeUrl, error);
         }
-        NSString *str = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
+//        NSString *str = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
 
         failure(operation, error);
     }];
@@ -378,8 +377,7 @@
     [requestSerializer setValue:email forHTTPHeaderField:@"X-taxibook-email"];
     [requestSerializer setValue:@"driver" forHTTPHeaderField:@"X-taxibook-user-type"];
     
-    NSString *getUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, relativeUrl] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
-    
+    NSString *getUrl = [NSString stringWithFormat:@"%@%@", self.serverDomain, relativeUrl];
     
     NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"GET" URLString:getUrl parameters:nil];
     
@@ -462,7 +460,7 @@
     [requestSerializer setValue:email forHTTPHeaderField:@"X-taxibook-email"];
     [requestSerializer setValue:@"driver" forHTTPHeaderField:@"X-taxibook-user-type"];
     
-    NSString *getUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/logout"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+    NSString *getUrl = [NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/logout"];
     
     NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"GET" URLString:getUrl parameters:nil];
     
@@ -510,7 +508,7 @@
 - (id)init
 {
     if (self = [super init]) {
-        self.serverDomain = @"http://ec2-54-255-141-218.ap-southeast-1.compute.amazonaws.com/index.php/";
+        self.serverDomain = @"http://ec2-54-255-141-218.ap-southeast-1.compute.amazonaws.com/index.php";
         self.isLoggingIn = NO;
 //        __weak TaxiBookConnectionManager *weakSelf = self;
         [self.normalRequestManager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
