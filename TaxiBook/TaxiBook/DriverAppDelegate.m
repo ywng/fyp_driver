@@ -94,7 +94,7 @@
                           ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
                           ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
     NSLog(@"register for remote notification device token %@", hexToken);
-    
+
     //    BOOL userLogin = [[NSUserDefaults standardUserDefaults] secretObjectForKey:TaxiBookInternalKeySessionToken] == nil? NO: YES;
     //
     //    if (userLogin) {
@@ -103,6 +103,12 @@
     //    }
     
     // directly save the device token
+    [[NSUserDefaults standardUserDefaults] setSecretObject:hexToken forKey:TaxiBookInternalKeyAPNSToken];
+    BOOL userLogin = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyLoggedIn];
+    if (userLogin) {
+        // send to server to update
+        
+    }
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error

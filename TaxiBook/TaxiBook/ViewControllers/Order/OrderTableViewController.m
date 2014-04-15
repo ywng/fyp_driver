@@ -10,6 +10,7 @@
 #import "OrderDetailViewController.h"
 #import "SSKeychain/SSKeychain.h"
 #import "NSUserDefaults+SecureAdditions.h"
+#import "TaxibookOrderSummaryCell.h"
 
 @interface OrderTableViewController ()
 @property (strong, nonatomic) OrderModel *orderModel;
@@ -85,14 +86,12 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
  
     // Return the number of rows in the section.
     return [self.orderModel count];
@@ -104,11 +103,27 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    if ([cell isKindOfClass:[TaxibookOrderSummaryCell class]]) {
+        TaxibookOrderSummaryCell *summaryCell = (TaxibookOrderSummaryCell *)cell;
+        
+        Order *order = [self.orderModel objectAtIndex:indexPath.row];
+        UILabel *fromLabel = summaryCell.fromLabel, *toLabel = summaryCell.toLabel, *pickupTimeLabel = summaryCell.pickupTimeLabel, *statusLabel = summaryCell.statusLabel;
+        [fromLabel setText:order.fromGPS.streetDescription];
+        [toLabel setText:order.toGPS.streetDescription];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterFullStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+        
+        [pickupTimeLabel setText:[NSString stringWithFormat:@"Pickup at: %@", [dateFormatter stringFromDate:order.orderTime]]];
+        [statusLabel setText:[NSString stringWithFormat:@"Status: %@", [Order orderStatusToString:order.orderStatus]]];
+        
+        return summaryCell;
+        
+    }
     
-    Order *order = [self.orderModel objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = order.toGPS.streetDescription;
-    cell.detailTextLabel.text = [Order orderStatusToString:order.orderStatus];
+    
+    return cell;
     
     return cell;
 }
@@ -201,11 +216,13 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
     if ([OrderDetailSegueIdentifer isEqualToString:segue.identifier]) {
         
         // sender is the order
-        OrderDetailViewController *bookingVC = (OrderDetailViewController *)segue.destinationViewController;
+        OrderDetailViewController *detailVC = (OrderDetailViewController *)segue.destinationViewController;
         
         //bookingVC.displayOrder = sender;
+        detailVC.displayOrder = sender;
         
     }
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
 }
 

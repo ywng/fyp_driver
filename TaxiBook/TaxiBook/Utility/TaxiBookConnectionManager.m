@@ -182,7 +182,7 @@
             NSString *phoneNumber = [responseObject objectForKey:@"phone_no"];
             NSString *email = [responseObject objectForKey:@"email"];
             NSString *licenseNo= [responseObject objectForKey:@"license_no"];
-            NSString *avail= [responseObject objectForKey:@"is_available"];
+            BOOL avail= [[responseObject objectForKey:@"is_available"] boolValue];
             
             [[NSUserDefaults standardUserDefaults] setSecretObject:email forKey:TaxiBookInternalKeyEmail];
             [[NSUserDefaults standardUserDefaults] setSecretObject:licenseNo forKey:TaxiBookInternalKeyLicenseNo];
@@ -190,7 +190,7 @@
             [[NSUserDefaults standardUserDefaults] setSecretObject:lastName forKey:TaxiBookInternalKeyLastName];
             [[NSUserDefaults standardUserDefaults] setSecretObject:sessionToken forKey:TaxiBookInternalKeySessionToken];
             [[NSUserDefaults standardUserDefaults] setSecretObject:expireTime forKey:TaxiBookInternalKeySessionExpireTime];
-             [[NSUserDefaults standardUserDefaults] setSecretObject:avail forKey:TaxiBookInternalKeyAvailability];
+            [[NSUserDefaults standardUserDefaults] setSecretBool:avail forKey:TaxiBookInternalKeyAvailability];
             [[NSUserDefaults standardUserDefaults] setSecretObject:phoneNumber forKey:TaxiBookInternalKeyPhone];
             [[NSUserDefaults standardUserDefaults] setSecretInteger:did forKey:TaxiBookInternalKeyUserId];
             [[NSUserDefaults standardUserDefaults] setSecretBool:YES forKey:TaxiBookInternalKeyLoggedIn];
@@ -218,6 +218,16 @@
                     // we do not have photo upload for now
 //                    [self uploadImageToUrl:taxibookOperation.relativeUrl withParameters:taxibookOperation.params filePath:taxibookOperation.fileURL success:taxibookOperation.success failure:taxibookOperation.failure loginIfNeed:NO];
                 }
+            }
+            
+            // register apns token
+            NSString *apnsToken = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyAPNSToken];
+            if (apnsToken && [apnsToken length] > 0) {
+                [self postToUrl:@"/driver/register_apns_token/" withParameters:@{@"device_token": apnsToken} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSLog(@"register inside apns token %@", responseObject);
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    NSLog(@"error: register inside apns token %@", error);
+                } loginIfNeed:YES];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -317,6 +327,8 @@
         if ([error.domain isEqualToString:TaxiBookServiceName]) {
             NSLog(@"received error from server %@ %@", relativeUrl, error);
         }
+        NSString *str = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
+
         failure(operation, error);
     }];
     

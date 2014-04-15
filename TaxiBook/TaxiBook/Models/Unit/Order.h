@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "TaxiBookGPS.h"
 #import "Driver.h"
+#import "Passenger.h"
 
 
 typedef NS_ENUM(NSInteger, OrderStatus) {
@@ -39,7 +40,7 @@ typedef NS_ENUM(NSInteger, OrderStatus) {
 @property (strong, nonatomic) NSDate *estimatedPickupTime;
 
 @property (strong, nonatomic) Driver *confirmedDriver;
-
+@property (strong, nonatomic) Passenger *confirmedPassenger;
 
 // only inactive order
 @property (nonatomic) float actualPrice;
