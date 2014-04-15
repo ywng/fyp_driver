@@ -36,6 +36,8 @@ extern NSString *TaxiBookInternalKeyFirstName;
 extern NSString *TaxiBookInternalKeyLastName;
 extern NSString *TaxiBookInternalKeyPhone;
 extern NSString *TaxiBookInternalKeyLicenseNo;
+extern NSString *TaxiBookInternalKeyProfilePic;
+extern NSString *TaxiBookInternalKeyHasProfilePic;
 extern NSString *TaxiBookInternalKeyAvailability;
 extern NSString *TaxiBookInternalKeySessionToken;
 extern NSString *TaxiBookInternalKeySessionExpireTime;

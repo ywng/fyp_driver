@@ -10,6 +10,7 @@
 #import <NSUserDefaults+SecureAdditions.h>
 #import "SubView.h"
 #import "FDTakeController.h"
+#import <UIKit+AFNetworking.h>
 
 @interface AccountViewController ()<FDTakeDelegate>
 
@@ -48,6 +49,17 @@
         [self.isAvailableSwitch setOn:(YES)];
     else
         [self.isAvailableSwitch setOn:(NO)];
+    
+    BOOL hasProfilePic = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyHasProfilePic];
+    
+    if (hasProfilePic) {
+    
+        NSURL *imageUrl = [NSURL URLWithString:[[NSUserDefaults standardUserDefaults] secretObjectForKey:TaxiBookInternalKeyProfilePic]];
+    
+        [self.profileImage setImageWithURL:imageUrl];
+    
+    }
+    
     
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editProfilePic:)];

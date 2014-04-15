@@ -182,6 +182,8 @@
             NSString *phoneNumber = [responseObject objectForKey:@"phone_no"];
             NSString *email = [responseObject objectForKey:@"email"];
             NSString *licenseNo= [responseObject objectForKey:@"license_no"];
+            NSString *profilePic = [responseObject objectForKey:@"profile_pic"];
+            
             BOOL avail= [[responseObject objectForKey:@"is_available"] boolValue];
             
             [[NSUserDefaults standardUserDefaults] setSecretObject:email forKey:TaxiBookInternalKeyEmail];
@@ -192,9 +194,17 @@
             [[NSUserDefaults standardUserDefaults] setSecretObject:expireTime forKey:TaxiBookInternalKeySessionExpireTime];
             [[NSUserDefaults standardUserDefaults] setSecretBool:avail forKey:TaxiBookInternalKeyAvailability];
             [[NSUserDefaults standardUserDefaults] setSecretObject:phoneNumber forKey:TaxiBookInternalKeyPhone];
+            [[NSUserDefaults standardUserDefaults] setSecretURL:profilePic forKey:TaxiBookInternalKeyProfilePic];
+            
+            if (profilePic == [NSNull null]) {
+                [[NSUserDefaults standardUserDefaults] setSecretBool:NO forKey:TaxiBookInternalKeyHasProfilePic];
+            }
+            else {
+                [[NSUserDefaults standardUserDefaults] setSecretBool:YES forKey:TaxiBookInternalKeyHasProfilePic];
+            }
+
             [[NSUserDefaults standardUserDefaults] setSecretInteger:did forKey:TaxiBookInternalKeyUserId];
-            [[NSUserDefaults standardUserDefaults] setSecretBool:YES forKey:TaxiBookInternalKeyLoggedIn];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+            [[NSUserDefaults standardUserDefaults] setSecretBool:YES forKey:TaxiBookInternalKeyLoggedIn];            [[NSUserDefaults standardUserDefaults] synchronize];
             
             
             NSString *password = [formDataParameters objectForKey:@"password"];
