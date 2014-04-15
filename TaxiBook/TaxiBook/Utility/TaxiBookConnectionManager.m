@@ -97,7 +97,7 @@
     
     NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
     
-    NSString *postUrl = [NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/edit_profile_pic/"];
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@", self.serverDomain, @"driver/edit_profile_pic/"];
     
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     
