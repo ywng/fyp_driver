@@ -9,8 +9,9 @@
 #import "AccountViewController.h"
 #import <NSUserDefaults+SecureAdditions.h>
 #import "SubView.h"
+#import "FDTakeController.h"
 
-@interface AccountViewController ()
+@interface AccountViewController ()<FDTakeDelegate>
 
 @end
 
@@ -49,7 +50,53 @@
         [self.isAvailableSwitch setOn:(NO)];
     
     
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editProfilePic:)];
+    singleTap.numberOfTapsRequired = 1;
+    singleTap.numberOfTouchesRequired = 1;
     
+    [self.profileImage addGestureRecognizer:singleTap];
+    [self.profileImage setUserInteractionEnabled:YES];
+    
+    self.takeController = [[FDTakeController alloc] init];
+    self.takeController.viewControllerForPresentingImagePickerController = self;
+    self.takeController.delegate = self;
+    self.takeController.allowsEditingPhoto = YES;
+    self.takeController.tabBar = self.tabBarController.tabBar;
+}
+
+- (void)editProfilePic:(UIGestureRecognizer *)gestureRecognizer {
+    [self.takeController takePhotoOrChooseFromLibrary];
+    self.takeController.allowsEditingPhoto = false;
+    
+}
+
+- (void)takeController:(FDTakeController *)controller gotPhoto:(UIImage *)photo withInfo:(NSDictionary *)info
+{
+    [self.profileImage setImage:photo];
+    [SubView loadingView:nil];
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    TaxiBookConnectionManager *manager = [TaxiBookConnectionManager sharedManager];
+    
+    [manager editProfilePic:dict image:photo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSInteger statusCode = [[responseObject objectForKey:@"status_code"] integerValue];
+        if (statusCode == 1) {
+            // success
+            
+            [SubView dismissAlert];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [SubView dismissAlert];
+        NSData *dataFromServer = operation.responseData;
+        
+        NSString *stringFromServer = [[NSString alloc] initWithData:dataFromServer encoding:NSUTF8StringEncoding];
+        NSLog(@"string from server : %@", stringFromServer);
+        
+        NSLog(@"Error: %@", error);
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Something happened" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+        [alertView show];
+        
+    } loginIfNeed:YES];
 }
 
 - (void)didReceiveMemoryWarning

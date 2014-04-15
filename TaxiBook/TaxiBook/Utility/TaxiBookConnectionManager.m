@@ -91,6 +91,64 @@
     } failure:failure];
 }
 
+- (void)editProfilePic:(NSDictionary *)formDataParameters image: (UIImage*) image success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure  loginIfNeed:(BOOL)loginIfNeed
+{
+    NSLog(@"edit profile pic");
+    
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    
+    NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/edit_profile_pic/"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+    
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    // get email and session_token stored in nsuserdefault
+    
+    NSString *email = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyEmail];
+    if (!email) {
+        NSLog(@"email cannot find");
+        [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationEmailCannotFind object:nil];
+        return ;
+    }
+    NSString *sessionToken = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeySessionToken];
+    if (!sessionToken) {
+        NSLog(@"session token cannot find");
+        sessionToken = @""; // let it expire the token and re-login
+    } else {
+        [requestSerializer setValue:sessionToken forHTTPHeaderField:@"X-taxibook-session-token"];
+    }
+    [requestSerializer setValue:email forHTTPHeaderField:@"X-taxibook-email"];
+    [requestSerializer setValue:@"driver" forHTTPHeaderField:@"X-taxibook-user-type"];
+    
+    
+    NSMutableURLRequest *request = [requestSerializer multipartFormRequestWithMethod:@"POST" URLString:postUrl parameters:formDataParameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:imageData name:@"userfile" fileName:@"userfile.jpg" mimeType:@"image/jpeg"];
+    } error:nil];
+    
+    
+    AFHTTPRequestOperation *uploadOp = [self.imageRequestManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject){
+        
+        NSNumber *responseStatusCode = [responseObject objectForKey:@"status_code"];
+        
+        if (responseStatusCode && [responseStatusCode integerValue] < 0) {
+            NSError *errorWithMessage = [NSError errorWithDomain:TaxiBookServiceName code:[responseStatusCode integerValue] userInfo:@{@"message": [responseObject objectForKey:@"message"]}];
+            failure(operation, errorWithMessage); // negative reponse code consider to be fail
+        } else {
+            success(operation, responseObject);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSString *str = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
+        NSLog(@"server return error %@" ,str);
+        
+        failure(operation, error);
+    }];
+    
+    [self.imageRequestManager.operationQueue addOperation:uploadOp];
+    
+}
+
+
 
 - (void)loginwithParemeters:(NSDictionary *)formDataParameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
