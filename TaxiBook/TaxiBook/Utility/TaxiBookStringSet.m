@@ -40,6 +40,8 @@ NSString const *TaxiBookInternalKeyLanguage = @"com.taxibook.internal.user.langu
 NSString const *TaxiBookInternalKeyLicenseNo=@"com.taxibook.internal.user.licenseNo";
 NSString const *TaxiBookInternalKeyProfilePic=@"com.taxibook.internal.user.profilePic";
 NSString const *TaxiBookInternalKeyHasProfilePic=@"com.taxibook.internal.user.hasProfilePic";
+NSString const *TaxiBookInternalKeyRating=@"com.taxibook.internal.user.rating";
+
 NSString const *TaxiBookInternalKeyMemberStatus=@"com.taxibook.internal.user.memeberStatus";
 NSString const *TaxiBookInternalKeyAvailability=@"com.taxibook.internal.user.availability";
 NSString const *TaxiBookInternalKeyAPNSToken = @"com.taxibook.internal.user.apnstoken";

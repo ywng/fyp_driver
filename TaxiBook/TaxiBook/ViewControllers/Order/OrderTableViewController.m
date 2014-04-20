@@ -49,20 +49,39 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
    // [self.orderModel downloadActiveOrders];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLoadOrderNotification:) name:TaxiBookNotificationUserLoadOrderData object:nil];
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLogoutNotification:) name:TaxiBookNotificationUserLoggedOut object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLogoutNotification:) name:TaxiBookNotificationUserLoggedOut object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLoginNotification:) name:TaxiBookNotificationUserLoggedIn object:nil];
+    
     
     BOOL memberStatus = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyMemberStatus];
     
     if (!memberStatus) {
         self.onHoldImageView.frame = CGRectMake(self.onHoldImageView.frame.origin.x,
-                                                 self.onHoldImageView.frame.origin.y, 320, 458);
-        
+                                                self.onHoldImageView.frame.origin.y, 320, 458);
     }
+    else {
+        self.onHoldImageView.frame = CGRectMake(self.onHoldImageView.frame.origin.x,
+                                                self.onHoldImageView.frame.origin.y, 320, 0);
+    }
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    BOOL memberStatus = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyMemberStatus];
+    
+    if (!memberStatus) {
+        self.onHoldImageView.frame = CGRectMake(self.onHoldImageView.frame.origin.x,
+                                                self.onHoldImageView.frame.origin.y, 320, 458);
+    }
+    else {
+        self.onHoldImageView.frame = CGRectMake(self.onHoldImageView.frame.origin.x,
+                                                self.onHoldImageView.frame.origin.y, 320, 0);
+    }
 }
 
 - (void)receivedLoadOrderNotification:(NSNotification *)notification
@@ -71,6 +90,20 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
     //every time login refresh the order list, other occasions, use refresh by scrolling down or trigger by other notification
     [self.refreshControl beginRefreshing];
     [self.orderModel downloadActiveOrders];
+}
+
+- (void)receivedLoginNotification:(NSNotification *)notification{
+    NSLog(@"in login notification");
+    BOOL memberStatus = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyMemberStatus];
+    
+    if (!memberStatus) {
+        self.onHoldImageView.frame = CGRectMake(self.onHoldImageView.frame.origin.x,
+                                                self.onHoldImageView.frame.origin.y, 320, 458);
+    }
+    else {
+        self.onHoldImageView.frame = CGRectMake(self.onHoldImageView.frame.origin.x,
+                                                self.onHoldImageView.frame.origin.y, 320, 0);
+    }
 }
 
 - (void)receivedLogoutNotification:(NSNotification *)notification

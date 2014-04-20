@@ -40,11 +40,13 @@
     NSString *lastName = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyLastName];
     NSString *email = [[NSUserDefaults standardUserDefaults]secretStringForKey:TaxiBookInternalKeyEmail];
     NSString *phoneNumber = [[NSUserDefaults standardUserDefaults]secretStringForKey:TaxiBookInternalKeyPhone];
+    NSString *rating = [[NSUserDefaults standardUserDefaults]secretStringForKey:TaxiBookInternalKeyRating];
     BOOL isAvailable = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyAvailability];
     self.firstNameTextField.text = firstName;
     self.lastNameTextField.text = lastName;
     self.emailLabel.text = email;
     self.phoneNumberTextField.text = phoneNumber;
+    self.ratingLabel.text = rating;
     if (isAvailable)
         [self.isAvailableSwitch setOn:(YES)];
     else

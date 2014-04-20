@@ -45,6 +45,7 @@ extern NSString *TaxiBookInternalKeyMemberStatus;
 extern NSString *TaxiBookInternalKeyLoggedIn;
 extern NSString *TaxiBookInternalKeyLanguage;
 extern NSString *TaxiBookInternalKeyAPNSToken;
+extern NSString *TaxiBookInternalKeyRating;
 
 
 @end

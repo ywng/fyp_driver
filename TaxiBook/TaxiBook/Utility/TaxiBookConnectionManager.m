@@ -183,6 +183,8 @@
             NSString *email = [responseObject objectForKey:@"email"];
             NSString *licenseNo= [responseObject objectForKey:@"license_no"];
             NSString *profilePic = [responseObject objectForKey:@"profile_pic"];
+            NSString *rating = [responseObject objectForKey:@"average_rating"];
+            
             
             BOOL memberStatus = [[responseObject objectForKey:@"member_status_id"] boolValue];
             BOOL avail= [[responseObject objectForKey:@"is_available"] boolValue];
@@ -207,7 +209,7 @@
 
             [[NSUserDefaults standardUserDefaults] setSecretInteger:did forKey:TaxiBookInternalKeyUserId];
             [[NSUserDefaults standardUserDefaults] setSecretBool:YES forKey:TaxiBookInternalKeyLoggedIn];            [[NSUserDefaults standardUserDefaults] synchronize];
-            
+            [[NSUserDefaults standardUserDefaults] setSecretObject:rating forKey:TaxiBookInternalKeyRating];
             
             NSString *password = [formDataParameters objectForKey:@"password"];
             if (password) {
