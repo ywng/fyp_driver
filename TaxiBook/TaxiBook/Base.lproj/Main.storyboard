@@ -472,6 +472,34 @@
             </objects>
             <point key="canvasLocation" x="95" y="-87"/>
         </scene>
+        <!--Order Table View Controller-->
+        <scene sceneID="4Af-hq-wHh">
+            <objects>
+                <tableViewController id="Cts-Pp-J3d" customClass="OrderTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="dr7-ek-iwd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Kcf-pC-7oE">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kcf-pC-7oE" id="dYs-F8-mAI">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Cts-Pp-J3d" id="w8q-xB-8ir"/>
+                            <outlet property="delegate" destination="Cts-Pp-J3d" id="fCi-Ax-uVv"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kZR-ZC-fku" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="616" y="-87"/>
+        </scene>
         <!--Order Table View Controller - Orders-->
         <scene sceneID="v6V-kW-QVo">
             <objects>
@@ -1115,7 +1143,7 @@
         <image name="account" width="30" height="30"/>
         <image name="background" width="850" height="568"/>
         <image name="fromTo" width="20" height="65"/>
-        <image name="onHold" width="320" height="458"/>
+        <image name="onHold" width="320" height="459"/>
         <image name="options" width="30" height="30"/>
         <image name="slogan" width="211" height="165"/>
         <image name="taxi" width="30" height="30"/>

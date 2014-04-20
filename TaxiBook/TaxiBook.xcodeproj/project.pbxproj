@@ -40,6 +40,7 @@
 		7780883318FAD1F400903D68 /* PassengerInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7780883218FAD1F400903D68 /* PassengerInfoView.m */; };
 		7780883A18FAF2FA00903D68 /* PassengerProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7780883918FAF2FA00903D68 /* PassengerProfileView.xib */; };
 		8E27BDF5610F4828BF277B6E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 782FD4AD354D441EAF27DDB2 /* libPods.a */; };
+		EA616B83190442DD00EB13D3 /* HistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA616B82190442DD00EB13D3 /* HistoryTableViewController.m */; };
 		EAF165A318D83D8E001422E7 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF165A218D83D8E001422E7 /* AccountViewController.m */; };
 		ED02F1D418ADFD2F00D6C6C3 /* DriverDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED02F1D018ADFD2F00D6C6C3 /* DriverDetailViewController.m */; };
 		ED02F1D518ADFD2F00D6C6C3 /* DriverMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED02F1D218ADFD2F00D6C6C3 /* DriverMasterViewController.m */; };
@@ -121,6 +122,8 @@
 		7780883918FAF2FA00903D68 /* PassengerProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PassengerProfileView.xib; sourceTree = "<group>"; };
 		782FD4AD354D441EAF27DDB2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8022F0ADFCE5467192DFB5B6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		EA616B81190442DD00EB13D3 /* HistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewController.h; sourceTree = "<group>"; };
+		EA616B82190442DD00EB13D3 /* HistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewController.m; sourceTree = "<group>"; };
 		EAF165A118D83D8E001422E7 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		EAF165A218D83D8E001422E7 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
 		ED02F1CF18ADFD2F00D6C6C3 /* DriverDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DriverDetailViewController.h; path = ViewControllers/DriverDetailViewController.h; sourceTree = "<group>"; };
@@ -318,6 +321,8 @@
 		EAF165A418D83D93001422E7 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				EA616B81190442DD00EB13D3 /* HistoryTableViewController.h */,
+				EA616B82190442DD00EB13D3 /* HistoryTableViewController.m */,
 				EAF165A118D83D8E001422E7 /* AccountViewController.h */,
 				EAF165A218D83D8E001422E7 /* AccountViewController.m */,
 			);
@@ -556,6 +561,7 @@
 				771B68EC18A3DAB5001AF1EA /* Driver.m in Sources */,
 				771B68ED18A3DAB5001AF1EA /* GMPlace.m in Sources */,
 				EAF165A318D83D8E001422E7 /* AccountViewController.m in Sources */,
+				EA616B83190442DD00EB13D3 /* HistoryTableViewController.m in Sources */,
 				771B68DD18A3DAA2001AF1EA /* TaxiBookErrorSet.m in Sources */,
 				ED02F1D418ADFD2F00D6C6C3 /* DriverDetailViewController.m in Sources */,
 				771B68EE18A3DAB5001AF1EA /* Order.m in Sources */,
