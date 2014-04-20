@@ -184,6 +184,7 @@
             NSString *licenseNo= [responseObject objectForKey:@"license_no"];
             NSString *profilePic = [responseObject objectForKey:@"profile_pic"];
             
+            BOOL memberStatus = [[responseObject objectForKey:@"member_status_id"] boolValue];
             BOOL avail= [[responseObject objectForKey:@"is_available"] boolValue];
             
             [[NSUserDefaults standardUserDefaults] setSecretObject:email forKey:TaxiBookInternalKeyEmail];
@@ -193,6 +194,7 @@
             [[NSUserDefaults standardUserDefaults] setSecretObject:sessionToken forKey:TaxiBookInternalKeySessionToken];
             [[NSUserDefaults standardUserDefaults] setSecretObject:expireTime forKey:TaxiBookInternalKeySessionExpireTime];
             [[NSUserDefaults standardUserDefaults] setSecretBool:avail forKey:TaxiBookInternalKeyAvailability];
+            [[NSUserDefaults standardUserDefaults] setSecretBool:memberStatus forKey:TaxiBookInternalKeyMemberStatus];
             [[NSUserDefaults standardUserDefaults] setSecretObject:phoneNumber forKey:TaxiBookInternalKeyPhone];
             [[NSUserDefaults standardUserDefaults] setSecretURL:profilePic forKey:TaxiBookInternalKeyProfilePic];
             

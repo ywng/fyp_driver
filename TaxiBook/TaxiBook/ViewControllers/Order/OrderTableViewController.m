@@ -51,10 +51,13 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLoadOrderNotification:) name:TaxiBookNotificationUserLoadOrderData object:nil];
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLogoutNotification:) name:TaxiBookNotificationUserLoggedOut object:nil];
     
-    BOOL isOnHold = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyLicenseNo];
+    BOOL memberStatus = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyMemberStatus];
     
-    [_onHoldImageView removeFromSuperview];
-
+    if (!memberStatus) {
+        self.onHoldImageView.frame = CGRectMake(self.onHoldImageView.frame.origin.x,
+                                                 self.onHoldImageView.frame.origin.y, 320, 458);
+        
+    }
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
