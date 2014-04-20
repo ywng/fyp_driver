@@ -450,9 +450,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onHolad" id="Wrc-QS-F6g">
+                            <rect key="frame" x="0.0" y="64" width="320" height="458"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OrderCell" id="ody-ey-UD3" customClass="TaxibookOrderSummaryCell">
-                                <rect key="frame" x="0.0" y="86" width="320" height="130"/>
+                                <rect key="frame" x="0.0" y="544" width="320" height="130"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ody-ey-UD3" id="Xp7-Ze-rbd">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="129"/>
@@ -543,6 +547,7 @@
                         </connections>
                     </refreshControl>
                     <connections>
+                        <outlet property="onHoldImageView" destination="Wrc-QS-F6g" id="CfS-Xo-qqh"/>
                         <segue destination="bxh-TY-AwE" kind="push" identifier="viewOrderDetail" id="WFh-Ib-fZb"/>
                     </connections>
                 </tableViewController>
@@ -1080,6 +1085,7 @@
         <image name="account" width="30" height="30"/>
         <image name="background" width="850" height="568"/>
         <image name="fromTo" width="20" height="65"/>
+        <image name="onHolad" width="320" height="458"/>
         <image name="options" width="30" height="30"/>
         <image name="slogan" width="211" height="165"/>
         <image name="taxi" width="30" height="30"/>
