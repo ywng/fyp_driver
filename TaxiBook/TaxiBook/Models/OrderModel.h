@@ -36,5 +36,8 @@
 
 - (void)downloadOrderDetail:(NSUInteger)orderId;
 
+- (void)confirmPassenger:(NSUInteger)orderId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:( void(^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+- (void)rejectPassenger:(NSUInteger)orderId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:( void(^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end

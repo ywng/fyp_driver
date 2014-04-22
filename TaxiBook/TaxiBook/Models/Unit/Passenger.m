@@ -45,16 +45,10 @@
         newPassenger.phoneNumber = tmp;
     }
     
-    // licenseNumber
-    tmp = [jsonData objectForKey:@"license_no"];
-    if (tmp && tmp!= [NSNull null]) {
-        newPassenger.licenseNumber = tmp;
-    }
-    
     // licensePhotoUrl
-    tmp = [jsonData objectForKey:@"license_photo"];
+    tmp = [jsonData objectForKey:@"profile_pic"];
     if (tmp && tmp!= [NSNull null]) {
-        newPassenger.licensePhotoUrl = [NSURL URLWithString:tmp];
+        newPassenger.profilePicUrl = [NSURL URLWithString:tmp];
     }
     
     return newPassenger;

@@ -205,8 +205,15 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Order *order = [self.activeOrderModel objectAtIndex:indexPath.row];
-    [self performSegueWithIdentifier:OrderDetailSegueIdentifer sender:order];
+    Order *order = nil;
+    if (indexPath.section == 0) {
+        order = [self.assignedOrderModel objectAtIndex:indexPath.row];
+    } else if (indexPath.section == 1) {
+        order = [self.activeOrderModel objectAtIndex:indexPath.row];
+    }
+    if (order) {
+        [self performSegueWithIdentifier:OrderDetailSegueIdentifer sender:order];
+    }
 }
 
 /*

@@ -165,32 +165,32 @@
 
 #pragma mark - IBAction
 
-//- (void)userConfirmTheDriver:(id)sender
-//{
-//    NSLog(@"Confirm button pressed");
-//    
-//    [self.orderModel confirmDriver:self.displayOrder.orderId success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"success to confirm driver");
-//        [self updateDisplayOrder];
-//        
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"fail to confirm driver %@", error);
-//        NSString *string = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
-//        NSLog(@"string %@",string);
-//    }];
-//    
-//}
-//
-//- (void)userRejectTheDriver:(id)sender
-//{
-//    NSLog(@"Reject button pressed");
-//    
-//    [self.orderModel rejectDriver:self.displayOrder.orderId success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"success to reject driver");
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"fail to reject driver %@", error);
-//    }];
-//}
+- (void)driverConfirmTheOrder:(id)sender
+{
+    NSLog(@"Confirm button pressed");
+    
+    [self.orderModel confirmPassenger:self.displayOrder.orderId success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"success to confirm passenger");
+        [self updateDisplayOrder];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"fail to confirm passenger %@", error);
+        NSString *string = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
+        NSLog(@"string %@",string);
+    }];
+    
+}
+
+- (void)driverRejectTheOrder:(id)sender
+{
+    NSLog(@"Reject button pressed");
+    
+    [self.orderModel rejectPassenger:self.displayOrder.orderId success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"success to reject passenger");
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"fail to reject passenger %@", error);
+    }];
+}
 
 #pragma mark - View update
 
@@ -368,7 +368,7 @@
                 UIView *confirmPassengerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
                 
                 UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 150, 80)];
-//                [cancelButton addTarget:self action:@selector(userRejectTheOrder:) forControlEvents:UIControlEventTouchUpInside];
+                [cancelButton addTarget:self action:@selector(driverRejectTheOrder:) forControlEvents:UIControlEventTouchUpInside];
                 [cancelButton setCenter:CGPointMake(80, 50)];
                 [cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
                 [cancelButton setBackgroundColor:[UIColor redColor]];
@@ -377,7 +377,7 @@
                 [confirmPassengerView addSubview:cancelButton];
                 
                 UIButton *confirmButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 150, 80)];
-//                [confirmButton addTarget:self action:@selector(userConfirmTheOrder:) forControlEvents:UIControlEventTouchUpInside];
+                [confirmButton addTarget:self action:@selector(driverConfirmTheOrder:) forControlEvents:UIControlEventTouchUpInside];
                 [confirmButton setCenter:CGPointMake(240, 50)];
                 [confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
                 [confirmButton setBackgroundColor:[UIColor greenColor]];
@@ -542,7 +542,12 @@
     if (postUrl) {
         [manager postToUrl:postUrl withParameters:@{@"oid": @(self.displayOrder.orderId), @"actual_price": @(self.displayOrder.estimatedPrice)} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [SubView loadingView:nil];
-            [self updateDisplayOrder];
+            if ([postUrl isEqualToString:@"/trip/confirm_finish/"]) {
+                [self.navigationController popViewControllerAnimated:YES];
+            } else {
+                [self updateDisplayOrder];
+            }
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSString *str = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
             NSLog(@"error in updating status: %@", str);

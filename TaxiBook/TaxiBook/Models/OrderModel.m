@@ -158,6 +158,19 @@
     } loginIfNeed:YES];
 }
 
+- (void)confirmPassenger:(NSUInteger)orderId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:( void(^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    TaxiBookConnectionManager *manager = [TaxiBookConnectionManager sharedManager];
+    
+    [manager postToUrl:@"/trip/bid_trip" withParameters:@{@"oid": @(orderId)} success:success failure:failure loginIfNeed:YES];
+}
+
+- (void)rejectPassenger:(NSUInteger)orderId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:( void(^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    TaxiBookConnectionManager *manager = [TaxiBookConnectionManager sharedManager];
+    
+    [manager postToUrl:@"/trip/bid_trip" withParameters:@{@"oid": @(orderId)} success:success failure:failure loginIfNeed:YES];
+}
 
 - (Order *)objectAtIndex:(NSUInteger)index
 {
