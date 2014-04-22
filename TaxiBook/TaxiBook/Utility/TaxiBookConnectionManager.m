@@ -434,6 +434,10 @@
         if ([error.domain isEqualToString:TaxiBookServiceName]) {
             NSLog(@"received error from server %@ %@", relativeUrl, error);
         }
+        if ([error.domain isEqualToString:AFNetworkingErrorDomain]) {
+            NSString *str = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
+            NSLog(@"received error %@", str);
+        }
         failure(operation, error);
     }];
     [self.normalRequestManager.operationQueue addOperation:operation];
