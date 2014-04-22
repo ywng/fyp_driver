@@ -57,16 +57,6 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
 }
 
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -81,12 +71,9 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
     BOOL memberStatus = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyMemberStatus];
     
     if (!memberStatus) {
-        self.onHoldImageView.frame = CGRectMake(self.onHoldImageView.frame.origin.x,
-                                                self.onHoldImageView.frame.origin.y, 320, 458);
-    }
-    else {
-        self.onHoldImageView.frame = CGRectMake(self.onHoldImageView.frame.origin.x,
-                                                self.onHoldImageView.frame.origin.y, 320, 0);
+        self.onHoldImageView.hidden = NO;
+    } else {
+        self.onHoldImageView.hidden = YES;
     }
     
     // Uncomment the following line to preserve selection between presentations.
@@ -113,7 +100,7 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
 {
     NSLog(@"in load order data notification");
     //every time login refresh the order list, other occasions, use refresh by scrolling down or trigger by other notification
-    [self.refreshControl beginRefreshing];
+//    [self.refreshControl beginRefreshing];
     [self.activeOrderModel downloadActiveOrders];
     [self.assignedOrderModel downloadAssignedOrders];
 }
@@ -267,7 +254,7 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
 
  */
 - (IBAction)pullToRefresh:(id)sender {
-    [self.refreshControl beginRefreshing];
+//    [self.refreshControl beginRefreshing];
     isLoadingActiveOrder = YES;
     isLoadingAssignedOrder = YES;
     [self.activeOrderModel downloadActiveOrders];
@@ -288,7 +275,7 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
         isLoadingAssignedOrder = NO;
     }
     if (!isLoadingAssignedOrder && !isLoadingActiveOrder) {
-        [self.refreshControl endRefreshing];
+//        [self.refreshControl endRefreshing];
     }
 }
 
@@ -300,7 +287,7 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
         isLoadingAssignedOrder = NO;
     }
     if (!isLoadingAssignedOrder && !isLoadingActiveOrder) {
-        [self.refreshControl endRefreshing];
+//        [self.refreshControl endRefreshing];
     }
 }
 

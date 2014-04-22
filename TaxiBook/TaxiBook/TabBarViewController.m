@@ -53,7 +53,7 @@
     BOOL loggedIn = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyLoggedIn];
     NSLog(@"Logged in? %d", loggedIn);
     if (!loggedIn) {
-        [self performSegueWithIdentifier:@"welcomeModal" sender:self];
+        [(DriverAppDelegate *)[[UIApplication sharedApplication] delegate] switchToWelcomeView];
     } else {
         BOOL avail = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyAvailability];
         if (avail) {
@@ -89,7 +89,8 @@
 
 - (void)receivedLogoutNotification:(NSNotification *)notification
 {
-    [self performSegueWithIdentifier:@"welcomeModal" sender:self];
+//    [self performSegueWithIdentifier:@"welcomeModal" sender:self];
+    [(DriverAppDelegate *)[[UIApplication sharedApplication] delegate] switchToWelcomeView];
 }
 
 - (void)startUpdatingLocation:(NSNotification *)notification

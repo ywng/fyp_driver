@@ -74,12 +74,14 @@
                 self.backgroundImageView.frame = CGRectMake( screenWidth - self.backgroundImageView.frame.size.width , self.backgroundImageView.frame.origin.y, self.backgroundImageView.frame.size.width, self.backgroundImageView.frame.size.height);
             } completion:nil];
             [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionTransitionNone animations:^{
+                NSLog(@"joinButton %@", NSStringFromCGRect(self.joinButton.frame));
                 self.joinButton.frame = CGRectMake(self.joinButton.frame.origin.x - screenWidth, self.joinButton.frame.origin.y, self.joinButton.frame.size.width, self.joinButton.frame.size.height);
             } completion:nil];
             [UIView animateWithDuration:0.8 delay:0.8 options:UIViewAnimationOptionTransitionNone animations:^{
                 self.sloganImageView.frame = CGRectMake(self.sloganImageView.frame.origin.x - screenWidth, self.sloganImageView.frame.origin.y, self.sloganImageView.frame.size.width, self.sloganImageView.frame.size.height);
             } completion:nil];
             [UIView animateWithDuration:0.8 delay:1.2 options:UIViewAnimationOptionTransitionNone animations:^{
+                NSLog(@"signinButton %@", NSStringFromCGRect(self.joinButton.frame));
                 self.signinButton.frame = CGRectMake(self.signinButton.frame.origin.x - screenWidth, self.signinButton.frame.origin.y, self.signinButton.frame.size.width, self.signinButton.frame.size.height);
             } completion:nil];
             self.animated = YES;

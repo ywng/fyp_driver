@@ -68,13 +68,15 @@
                             [self.emailLbl text], @"email",
                             [self.passwordLbl text], @"password",
                             @"driver", @"user_type",nil];
-
+    
+    [SubView loadingView:nil];
+    
     [connection loginwithParemeters:params
                             success:^(AFHTTPRequestOperation *operation, id responseObject){
                                 //the notification is already included in login request
                                // [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedIn object:nil];
                                 [SubView dismissAlert];
-                                [self dismissViewControllerAnimated:YES completion:nil];
+                                [(DriverAppDelegate *)[[UIApplication sharedApplication] delegate] switchToMainView];
                             }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error){
                                 [SubView dismissAlert];
@@ -87,9 +89,7 @@
                                 
                                 return;
                             }];
-    
-    
-    [SubView loadingView:nil];
+
 }
 
 
