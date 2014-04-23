@@ -219,7 +219,7 @@
                                             <action selector="uploadLicenseButtonPressed:" destination="Xg1-0F-H5o" eventType="touchUpInside" id="4Nd-RK-5A7"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lku-cw-hep">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lku-cw-hep">
                                         <rect key="frame" x="79" y="270" width="163" height="163"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
@@ -398,7 +398,7 @@
                                     <action selector="isAvailableSwitchValueChanged" destination="OY4-5V-8qH" eventType="valueChanged" id="lBk-NO-SYC"/>
                                 </connections>
                             </switch>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BenLeung" translatesAutoresizingMaskIntoConstraints="NO" id="lY9-Eh-YtU">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="lY9-Eh-YtU">
                                 <rect key="frame" x="20" y="89" width="66" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -1154,7 +1154,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BenLeung" width="250" height="250"/>
         <image name="account" width="30" height="30"/>
         <image name="background" width="850" height="568"/>
         <image name="fromTo" width="20" height="65"/>

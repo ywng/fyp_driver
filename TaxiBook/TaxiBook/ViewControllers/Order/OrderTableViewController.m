@@ -15,7 +15,7 @@
 @interface OrderTableViewController ()
 @property (strong, nonatomic) OrderModel *activeOrderModel;
 @property (strong, nonatomic) OrderModel *assignedOrderModel;
-
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @end
 
@@ -56,16 +56,21 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
     return _assignedOrderModel;
 }
 
+- (UIRefreshControl *)refreshControl
+{
+    if (!_refreshControl) {
+        _refreshControl = [[UIRefreshControl alloc] init];
+    }
+    return _refreshControl;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //[self.refreshControl beginRefreshing];
-   // [self.orderModel downloadActiveOrders];
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLoadOrderNotification:) name:TaxiBookNotificationUserLoadOrderData object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLogoutNotification:) name:TaxiBookNotificationUserLoggedOut object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLoginNotification:) name:TaxiBookNotificationUserLoggedIn object:nil];
     
     
     BOOL memberStatus = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyMemberStatus];
@@ -75,6 +80,13 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
     } else {
         self.onHoldImageView.hidden = YES;
     }
+    
+    [self.refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+    
+    [self.refreshControl beginRefreshing];
+    [self.activeOrderModel downloadActiveOrders];
+    [self.assignedOrderModel downloadAssignedOrders];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -105,26 +117,10 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
     [self.assignedOrderModel downloadAssignedOrders];
 }
 
-- (void)receivedLoginNotification:(NSNotification *)notification{
-    NSLog(@"in login notification");
-    BOOL memberStatus = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyMemberStatus];
-    
-    if (!memberStatus) {
-        self.onHoldImageView.frame = CGRectMake(self.onHoldImageView.frame.origin.x,
-                                                self.onHoldImageView.frame.origin.y, 320, 458);
-    }
-    else {
-        self.onHoldImageView.frame = CGRectMake(self.onHoldImageView.frame.origin.x,
-                                                self.onHoldImageView.frame.origin.y, 320, 0);
-    }
-}
-
 - (void)receivedLogoutNotification:(NSNotification *)notification
 {
-    NSLog(@"in logout notification");
     [self.activeOrderModel clearData];
-    [self.tableView reloadData];
-    
+    [self.assignedOrderModel clearData];
 }
 
 
@@ -203,6 +199,30 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
     }
 }
 
+#pragma mark - Table View Data Source
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 25)];
+    UILabel *labelView = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 310, 25)];
+    
+    
+    [containerView setBackgroundColor:[UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:0.8]];
+    [labelView setFont:[UIFont systemFontOfSize:14]];
+    if (section == 0) {
+        [labelView setText:@"Orders waiting to confirm"];
+    } else if (section == 1) {
+        [labelView setText:@"Confirmed Orders"];
+    }
+    [containerView addSubview:labelView];
+    
+    return containerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 25;
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -242,25 +262,6 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
 }
 */
 
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
-- (IBAction)pullToRefresh:(id)sender {
-//    [self.refreshControl beginRefreshing];
-    isLoadingActiveOrder = YES;
-    isLoadingAssignedOrder = YES;
-    [self.activeOrderModel downloadActiveOrders];
-    [self.assignedOrderModel downloadAssignedOrders];
-}
-
 #pragma mark - OrderModelDelegate
 
 - (void)finishDownloadOrders:(OrderModel *)orderModel
@@ -275,7 +276,7 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
         isLoadingAssignedOrder = NO;
     }
     if (!isLoadingAssignedOrder && !isLoadingActiveOrder) {
-//        [self.refreshControl endRefreshing];
+        [self.refreshControl endRefreshing];
     }
 }
 
@@ -287,7 +288,7 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
         isLoadingAssignedOrder = NO;
     }
     if (!isLoadingAssignedOrder && !isLoadingActiveOrder) {
-//        [self.refreshControl endRefreshing];
+        [self.refreshControl endRefreshing];
     }
 }
 
@@ -312,5 +313,14 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
     
 }
 
+#pragma mark - UIRefreshControl
+
+- (void)pullToRefresh
+{
+    isLoadingActiveOrder = YES;
+    isLoadingAssignedOrder = YES;
+    [self.assignedOrderModel downloadAssignedOrders];
+    [self.activeOrderModel downloadActiveOrders];
+}
 
 @end

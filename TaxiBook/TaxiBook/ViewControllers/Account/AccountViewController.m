@@ -96,7 +96,6 @@
         NSInteger statusCode = [[responseObject objectForKey:@"status_code"] integerValue];
         if (statusCode == 1) {
             // success
-            
             [SubView dismissAlert];
         }
         

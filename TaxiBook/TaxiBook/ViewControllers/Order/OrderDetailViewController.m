@@ -411,9 +411,9 @@
                 /* top bar config */
                 NSTimeInterval timeDiff = [self.displayOrder.orderTime timeIntervalSinceNow];
                 if (timeDiff < 0) {
-                    timeDiff = 0;
+                    timeDiff = -timeDiff;
                 }
-                [self setupTopBarWithColor:[UIColor colorWithRed:60.0/255 green:188.0/255 blue:1 alpha:1] withString:[NSString stringWithFormat:@"Pickup time %ld hr %ld min remaining", (long)timeDiff/3600, ((long)timeDiff%3600)/60] spinnerNeed:NO];
+                [self setupTopBarWithColor:[UIColor colorWithRed:60.0/255 green:188.0/255 blue:1 alpha:1] withString:[NSString stringWithFormat:@"Pickup time %ld hr %ld min passed", (long)timeDiff/3600, ((long)timeDiff%3600)/60] spinnerNeed:NO];
                 
                 /* bottom view config */
                 [self setupBottomBarPassengerInfoView];
@@ -540,8 +540,9 @@
             break;
     }
     if (postUrl) {
+        [SubView loadingView:nil];
         [manager postToUrl:postUrl withParameters:@{@"oid": @(self.displayOrder.orderId), @"actual_price": @(self.displayOrder.estimatedPrice)} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            [SubView loadingView:nil];
+            [SubView dismissAlert];
             if ([postUrl isEqualToString:@"/trip/confirm_finish/"]) {
                 [self.navigationController popViewControllerAnimated:YES];
             } else {
@@ -549,6 +550,7 @@
             }
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [SubView dismissAlert];
             NSString *str = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
             NSLog(@"error in updating status: %@", str);
         } loginIfNeed:YES];
