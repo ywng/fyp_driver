@@ -30,7 +30,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     CALayer *imageLayer = self.profileImage.layer;
     [imageLayer setCornerRadius:33];
     [imageLayer setBorderWidth:0];
@@ -61,6 +65,9 @@
     
         [self.profileImage setImageWithURL:imageUrl];
     
+    }
+    else {
+        [self.profileImage setImage:[UIImage imageNamed:@"noProfilePic"]];
     }
     
     
@@ -128,10 +135,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
+
 
 - (void)viewDidDisappear:(BOOL)animated
 {
