@@ -22,6 +22,8 @@
 
 #define DefaultOrderModelLimit 20
 
+@property (strong, nonatomic) NSString *identifier;
+
 + (OrderModel *)newInstanceWithIdentifier:(NSString *)identifier delegate:(id<OrderModelDelegate>)delegate;
 
 - (void)clearData;
@@ -29,8 +31,13 @@
 - (Order *)objectAtIndex:(NSUInteger)index;
 - (void)downloadActiveOrders;
 - (void)downloadActiveOrders:(NSUInteger)limit offset:(NSUInteger)offset;
+- (void)downloadAssignedOrders;
+- (void)downloadAssignedOrders:(NSUInteger)limit offset:(NSUInteger)offset;
 
 - (void)downloadOrderDetail:(NSUInteger)orderId;
 
+- (void)confirmPassenger:(NSUInteger)orderId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:( void(^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+- (void)rejectPassenger:(NSUInteger)orderId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:( void(^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end

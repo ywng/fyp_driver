@@ -40,13 +40,14 @@
     NSString *lastName = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyLastName];
     NSString *email = [[NSUserDefaults standardUserDefaults]secretStringForKey:TaxiBookInternalKeyEmail];
     NSString *phoneNumber = [[NSUserDefaults standardUserDefaults]secretStringForKey:TaxiBookInternalKeyPhone];
-    NSString *rating = [[NSUserDefaults standardUserDefaults]secretStringForKey:TaxiBookInternalKeyRating];
+    NSNumber *rating = [[NSUserDefaults standardUserDefaults]secretObjectForKey:TaxiBookInternalKeyRating];
     BOOL isAvailable = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyAvailability];
     self.firstNameTextField.text = firstName;
     self.lastNameTextField.text = lastName;
     self.emailLabel.text = email;
     self.phoneNumberTextField.text = phoneNumber;
-    self.ratingLabel.text = rating;
+    double ratingDouble = [rating doubleValue];
+    self.ratingLabel.text = [NSString stringWithFormat:@"%.3g", ratingDouble];
     if (isAvailable)
         [self.isAvailableSwitch setOn:(YES)];
     else
@@ -56,7 +57,7 @@
     
     if (hasProfilePic) {
     
-        NSURL *imageUrl = [NSURL URLWithString:[[NSUserDefaults standardUserDefaults] secretObjectForKey:TaxiBookInternalKeyProfilePic]];
+        NSURL *imageUrl = [[NSUserDefaults standardUserDefaults] secretURLForKey:TaxiBookInternalKeyProfilePic];
     
         [self.profileImage setImageWithURL:imageUrl];
     
@@ -95,7 +96,6 @@
         NSInteger statusCode = [[responseObject objectForKey:@"status_code"] integerValue];
         if (statusCode == 1) {
             // success
-            
             [SubView dismissAlert];
         }
         

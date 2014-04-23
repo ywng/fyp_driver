@@ -182,8 +182,8 @@
             NSString *phoneNumber = [responseObject objectForKey:@"phone_no"];
             NSString *email = [responseObject objectForKey:@"email"];
             NSString *licenseNo= [responseObject objectForKey:@"license_no"];
-            NSString *profilePic = [responseObject objectForKey:@"profile_pic"];
-            NSString *rating = [responseObject objectForKey:@"average_rating"];
+            id profilePic = [responseObject objectForKey:@"profile_pic"];
+            NSNumber *rating = [responseObject objectForKey:@"average_rating"];
             
             
             BOOL memberStatus = [[responseObject objectForKey:@"member_status_id"] boolValue];
@@ -198,12 +198,13 @@
             [[NSUserDefaults standardUserDefaults] setSecretBool:avail forKey:TaxiBookInternalKeyAvailability];
             [[NSUserDefaults standardUserDefaults] setSecretBool:memberStatus forKey:TaxiBookInternalKeyMemberStatus];
             [[NSUserDefaults standardUserDefaults] setSecretObject:phoneNumber forKey:TaxiBookInternalKeyPhone];
-            [[NSUserDefaults standardUserDefaults] setSecretURL:profilePic forKey:TaxiBookInternalKeyProfilePic];
+
             
             if (profilePic == [NSNull null]) {
                 [[NSUserDefaults standardUserDefaults] setSecretBool:NO forKey:TaxiBookInternalKeyHasProfilePic];
-            }
-            else {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyProfilePic];
+            } else {
+                [[NSUserDefaults standardUserDefaults] setSecretURL:[NSURL URLWithString:profilePic] forKey:TaxiBookInternalKeyProfilePic];
                 [[NSUserDefaults standardUserDefaults] setSecretBool:YES forKey:TaxiBookInternalKeyHasProfilePic];
             }
 
@@ -434,6 +435,10 @@
         if ([error.domain isEqualToString:TaxiBookServiceName]) {
             NSLog(@"received error from server %@ %@", relativeUrl, error);
         }
+        if ([error.domain isEqualToString:AFNetworkingErrorDomain]) {
+            NSString *str = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
+            NSLog(@"received error %@", str);
+        }
         failure(operation, error);
     }];
     [self.normalRequestManager.operationQueue addOperation:operation];
@@ -473,17 +478,21 @@
         NSLog(@"received logout confirm from server");
         
         [[NSUserDefaults standardUserDefaults] setSecretBool:NO forKey:TaxiBookInternalKeyLoggedIn];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyEmail];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyFirstName];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyLastName];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeySessionToken];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeySessionExpireTime];
-        [[NSUserDefaults standardUserDefaults] setSecretInteger:-1 forKey:TaxiBookInternalKeyUserId];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyLicenseNo];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyEmail];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyFirstName];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyLastName];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeySessionToken];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeySessionExpireTime];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyUserId];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyLicenseNo];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyPhone];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyProfilePic];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyAvailability];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyAPNSToken];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyRating];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyHasProfilePic];
         
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedOut object:nil];
         
         completionHandler(responseObject);
         
@@ -491,17 +500,22 @@
         NSLog(@"received error from server: logout function %@", error);
 
         [[NSUserDefaults standardUserDefaults] setSecretBool:NO forKey:TaxiBookInternalKeyLoggedIn];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyEmail];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyFirstName];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyLastName];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeySessionToken];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeySessionExpireTime];
-        [[NSUserDefaults standardUserDefaults] setSecretInteger:-1 forKey:TaxiBookInternalKeyUserId];
-          [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyLicenseNo];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyEmail];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyFirstName];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyLastName];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeySessionToken];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeySessionExpireTime];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyUserId];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyLicenseNo];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyPhone];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyProfilePic];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyAvailability];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyAPNSToken];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyRating];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyHasProfilePic];
+        
         
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedOut object:nil];
         completionHandler(nil);
     }];
 

@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AFNetworking/AFNetworkReachabilityManager.h"
-#import "AFNetworking/AFHTTPRequestOperationManager.h"
-#import "AFNetworking/AFHTTPSessionManager.h"
+#import "AFNetworking/AFNetworking.h"
+//#import "AFNetworking/AFNetworkReachabilityManager.h"
+//#import "AFNetworking/AFHTTPRequestOperationManager.h"
+//#import "AFNetworking/AFHTTPSessionManager.h"
 
 #pragma mark -
 #pragma mark - TaxiBookHTTPOperation

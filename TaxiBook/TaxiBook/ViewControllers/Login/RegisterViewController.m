@@ -104,8 +104,8 @@
         [manager loginwithParemeters:@{@"email": self.emailTextField.text, @"password": self.passwordTextField.text, @"user_type": @"driver",@"license_no":self.driverLicense.text} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             //the notification is already included in login request
             //[[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedIn object:nil];
-            [self dismissViewControllerAnimated:YES completion:nil];
             [SubView dismissAlert];
+            [(DriverAppDelegate *)[[UIApplication sharedApplication] delegate] switchToMainView];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [SubView dismissAlert];
             NSLog(@"error login %@", error);

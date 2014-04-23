@@ -35,6 +35,14 @@
     // start google map service
     [GMSServices provideAPIKey:TaxiBookGoogleAPIIOSKey];
     
+    BOOL login = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyLoggedIn];
+    
+    if (login) {
+        [self switchToMainView];
+    } else {
+        [self switchToWelcomeView];
+    }
+    
     return YES;
 
 }
@@ -116,5 +124,16 @@
     NSLog(@"fail to register for remote notification %ld %@",(long)error.code, error.localizedDescription);
 }
 
+- (void)switchToWelcomeView
+{
+    UIViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"WelcomeScene"];
+    self.window.rootViewController = vc;
+}
+
+- (void)switchToMainView
+{
+    UIViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
+    self.window.rootViewController = vc;
+}
 
 @end

@@ -11,7 +11,6 @@
 @interface OrderModel ()
 
 @property (weak, nonatomic) id<OrderModelDelegate> delegate;
-@property (strong, nonatomic) NSString *identifier;
 @property (strong, nonatomic) NSMutableArray *orderArray;
 
 @end
@@ -73,6 +72,42 @@
     
 }
 
+- (void)downloadAssignedOrders
+{
+    OrderModel *newModel = [self mutableCopy];
+    [newModel clearData];
+    [newModel downloadAssignedOrders:5 offset:0];
+}
+
+- (void)downloadAssignedOrders:(NSUInteger)limit offset:(NSUInteger)offset
+{
+    OrderModel *newModel = [self mutableCopy];
+    
+    TaxiBookConnectionManager *manager = [TaxiBookConnectionManager sharedManager];
+    
+    [manager getUrl:[NSString stringWithFormat:@"/driver/assigned_trip/%lu/%lu", limit, offset] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"successfully download assigned orders");
+        
+        id orders = [responseObject objectForKey:@"order"];
+        
+        for (id orderData in orders) {
+            Order *order = [Order newInstanceFromServerData:orderData];
+            [newModel.orderArray addObject:order];
+        }
+        
+        if (self.delegate && [self.delegate conformsToProtocol:@protocol(OrderModelDelegate)]) {
+            [self.delegate finishDownloadOrders:newModel];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"fail to download active orders %@", error);
+        if (self.delegate && [self.delegate conformsToProtocol:@protocol(OrderModelDelegate)]) {
+            [self.delegate failDownloadOrders:newModel];
+        }
+    } loginIfNeed:YES];
+}
+
 - (void)downloadOrderDetail:(NSUInteger)orderId
 {
     OrderModel *newModel = [self mutableCopy];
@@ -123,6 +158,19 @@
     } loginIfNeed:YES];
 }
 
+- (void)confirmPassenger:(NSUInteger)orderId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:( void(^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    TaxiBookConnectionManager *manager = [TaxiBookConnectionManager sharedManager];
+    
+    [manager postToUrl:@"/trip/bid_trip" withParameters:@{@"oid": @(orderId)} success:success failure:failure loginIfNeed:YES];
+}
+
+- (void)rejectPassenger:(NSUInteger)orderId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:( void(^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    TaxiBookConnectionManager *manager = [TaxiBookConnectionManager sharedManager];
+    
+    [manager postToUrl:@"/trip/bid_trip" withParameters:@{@"oid": @(orderId)} success:success failure:failure loginIfNeed:YES];
+}
 
 - (Order *)objectAtIndex:(NSUInteger)index
 {
