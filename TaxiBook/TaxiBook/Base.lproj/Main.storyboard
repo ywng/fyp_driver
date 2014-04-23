@@ -491,16 +491,16 @@
         <scene sceneID="4Af-hq-wHh">
             <objects>
                 <tableViewController id="Cts-Pp-J3d" customClass="HistoryTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="130" sectionHeaderHeight="22" sectionFooterHeight="22" id="dr7-ek-iwd">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="dr7-ek-iwd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OrderCell" rowHeight="130" id="HSt-fE-SY8" customClass="TaxibookOrderSummaryCell">
-                                <rect key="frame" x="0.0" y="86" width="320" height="130"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OrderCell" rowHeight="100" id="HSt-fE-SY8" customClass="TaxibookOrderSummaryCell">
+                                <rect key="frame" x="0.0" y="86" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HSt-fE-SY8" id="l30-hX-duE">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="129"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fromTo" translatesAutoresizingMaskIntoConstraints="NO" id="EhU-mn-pEM">
@@ -529,22 +529,9 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rXo-Ai-taH">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="liD-Uf-FCu">
                                             <rect key="frame" x="10" y="68" width="298" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="G89-Ew-53S"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="liD-Uf-FCu">
-                                            <rect key="frame" x="10" y="97" width="298" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="Bya-Sx-SFj"/>
-                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -553,23 +540,16 @@
                                     <constraints>
                                         <constraint firstItem="mUA-78-Uf4" firstAttribute="top" secondItem="sBh-GF-x38" secondAttribute="bottom" constant="8" id="09c-Vh-yWG"/>
                                         <constraint firstAttribute="trailing" secondItem="sBh-GF-x38" secondAttribute="trailing" constant="5" id="1jZ-N6-Cdw"/>
-                                        <constraint firstAttribute="trailing" secondItem="liD-Uf-FCu" secondAttribute="trailing" constant="12" id="4Pv-45-mAC"/>
-                                        <constraint firstItem="liD-Uf-FCu" firstAttribute="top" secondItem="rXo-Ai-taH" secondAttribute="bottom" constant="8" id="A7x-5y-N7v"/>
                                         <constraint firstItem="sBh-GF-x38" firstAttribute="top" secondItem="l30-hX-duE" secondAttribute="top" constant="10" id="Cqc-AI-YYI"/>
-                                        <constraint firstItem="rXo-Ai-taH" firstAttribute="top" secondItem="mUA-78-Uf4" secondAttribute="bottom" constant="8" id="D06-qD-bzU"/>
-                                        <constraint firstItem="rXo-Ai-taH" firstAttribute="leading" secondItem="l30-hX-duE" secondAttribute="leading" constant="10" id="GbZ-CW-TAs"/>
                                         <constraint firstItem="EhU-mn-pEM" firstAttribute="leading" secondItem="l30-hX-duE" secondAttribute="leading" constant="10" id="IyJ-eM-Bau"/>
                                         <constraint firstItem="EhU-mn-pEM" firstAttribute="top" secondItem="l30-hX-duE" secondAttribute="top" id="JzU-5s-Dx5"/>
                                         <constraint firstAttribute="trailing" secondItem="mUA-78-Uf4" secondAttribute="trailing" constant="5" id="kml-bm-YM9"/>
-                                        <constraint firstItem="liD-Uf-FCu" firstAttribute="leading" secondItem="l30-hX-duE" secondAttribute="leading" constant="10" id="nqL-gR-WeD"/>
-                                        <constraint firstAttribute="trailing" secondItem="rXo-Ai-taH" secondAttribute="trailing" constant="12" id="q8s-8B-2ed"/>
                                         <constraint firstItem="sBh-GF-x38" firstAttribute="leading" secondItem="EhU-mn-pEM" secondAttribute="trailing" constant="5" id="xbD-N1-sjM"/>
                                         <constraint firstItem="mUA-78-Uf4" firstAttribute="leading" secondItem="EhU-mn-pEM" secondAttribute="trailing" constant="5" id="xsl-eg-qQQ"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="fromLabel" destination="sBh-GF-x38" id="OuZ-rs-xGn"/>
-                                    <outlet property="pickupTimeLabel" destination="rXo-Ai-taH" id="Kzv-V0-s7V"/>
                                     <outlet property="statusLabel" destination="liD-Uf-FCu" id="5nW-n9-HtV"/>
                                     <outlet property="toLabel" destination="mUA-78-Uf4" id="Zjk-v2-Dhb"/>
                                 </connections>
