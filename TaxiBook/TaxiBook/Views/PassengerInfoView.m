@@ -26,7 +26,7 @@
 
 - (void)initSetup
 {
-    [self.mobileNumberTextView setContentInset:UIEdgeInsetsMake(-4, -4, 0, 0)];
+    [self.mobileNumberTextView setContentInset:UIEdgeInsetsMake(-6, -4, 0, 0)];
 }
 
 - (void)updateInfo:(Passenger *)passenger orderStatus:(OrderStatus)orderStatus

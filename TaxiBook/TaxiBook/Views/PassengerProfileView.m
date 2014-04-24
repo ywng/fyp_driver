@@ -74,6 +74,8 @@
             } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                 NSLog(@"image fail to load");
             }];
+        } else {
+            [self.passengerProfilePic setImage:[UIImage imageNamed:@"noProfilePic"]];
         }
         if (passenger.firstName && passenger.lastName) {
             [self.passengerNameLabel setText:[NSString stringWithFormat:@"%@ %@", passenger.firstName, passenger.lastName]];
