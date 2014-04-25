@@ -208,7 +208,7 @@
 {
     TaxiBookConnectionManager *manager = [TaxiBookConnectionManager sharedManager];
     
-    [manager postToUrl:@"/trip/bid_trip" withParameters:@{@"oid": @(orderId)} success:success failure:failure loginIfNeed:YES];
+    [manager postToUrl:@"/trip/driver_reject_trip" withParameters:@{@"oid": @(orderId)} success:success failure:failure loginIfNeed:YES];
 }
 
 - (Order *)objectAtIndex:(NSUInteger)index

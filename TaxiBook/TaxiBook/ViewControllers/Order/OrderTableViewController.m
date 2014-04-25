@@ -106,6 +106,10 @@ static NSString *OrderDetailSegueIdentifer = @"viewOrderDetail";
         self.onHoldImageView.frame = CGRectMake(self.onHoldImageView.frame.origin.x,
                                                 self.onHoldImageView.frame.origin.y, 320, 0);
     }
+    if (!isLoadingActiveOrder && !isLoadingAssignedOrder) {
+        [self.refreshControl beginRefreshing];
+        [self pullToRefresh];
+    }
 }
 
 - (void)receivedLoadOrderNotification:(NSNotification *)notification

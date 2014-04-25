@@ -187,8 +187,12 @@
     
     [self.orderModel rejectPassenger:self.displayOrder.orderId success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"success to reject passenger");
+        [self.navigationController popViewControllerAnimated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"fail to reject passenger %@", error);
+        NSString *str = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
+        NSLog(@"error %@",str);
+        [SubView showError:@"Something wrong with the internet" withTitle:@"Oops"];
     }];
 }
 
@@ -544,6 +548,7 @@
         [manager postToUrl:postUrl withParameters:@{@"oid": @(self.displayOrder.orderId), @"actual_price": @(self.displayOrder.estimatedPrice)} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [SubView dismissAlert];
             if ([postUrl isEqualToString:@"/trip/confirm_finish/"]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoadOrderData object:nil];
                 [self.navigationController popViewControllerAnimated:YES];
             } else {
                 [self updateDisplayOrder];
