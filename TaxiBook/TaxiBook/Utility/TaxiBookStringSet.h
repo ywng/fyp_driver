@@ -22,6 +22,7 @@ extern NSString *TaxiBookNotificationEmailCannotFind;
 extern NSString *TaxiBookNotificationUserLoggedIn;
 extern NSString *TaxiBookNotificationUserLoggedOut;
 extern NSString *TaxiBookNotificationUserLoadOrderData;
+extern NSString *TaxibookNotificationDriverStartWorking;
 
 #pragma mark -
 #pragma mark - Internal Key Mapping
@@ -35,11 +36,16 @@ extern NSString *TaxiBookInternalKeyFirstName;
 extern NSString *TaxiBookInternalKeyLastName;
 extern NSString *TaxiBookInternalKeyPhone;
 extern NSString *TaxiBookInternalKeyLicenseNo;
+extern NSString *TaxiBookInternalKeyProfilePic;
+extern NSString *TaxiBookInternalKeyHasProfilePic;
 extern NSString *TaxiBookInternalKeyAvailability;
 extern NSString *TaxiBookInternalKeySessionToken;
 extern NSString *TaxiBookInternalKeySessionExpireTime;
+extern NSString *TaxiBookInternalKeyMemberStatus;
 extern NSString *TaxiBookInternalKeyLoggedIn;
 extern NSString *TaxiBookInternalKeyLanguage;
+extern NSString *TaxiBookInternalKeyAPNSToken;
+extern NSString *TaxiBookInternalKeyRating;
 
 
 @end

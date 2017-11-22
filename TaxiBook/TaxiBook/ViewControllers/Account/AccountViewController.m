@@ -9,8 +9,10 @@
 #import "AccountViewController.h"
 #import <NSUserDefaults+SecureAdditions.h>
 #import "SubView.h"
+#import "FDTakeController.h"
+#import <UIKit+AFNetworking.h>
 
-@interface AccountViewController ()
+@interface AccountViewController ()<FDTakeDelegate>
 
 @end
 
@@ -28,7 +30,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     CALayer *imageLayer = self.profileImage.layer;
     [imageLayer setCornerRadius:33];
     [imageLayer setBorderWidth:0];
@@ -38,18 +44,80 @@
     NSString *lastName = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyLastName];
     NSString *email = [[NSUserDefaults standardUserDefaults]secretStringForKey:TaxiBookInternalKeyEmail];
     NSString *phoneNumber = [[NSUserDefaults standardUserDefaults]secretStringForKey:TaxiBookInternalKeyPhone];
-    NSString *isAvailable = [[NSUserDefaults standardUserDefaults]secretStringForKey:TaxiBookInternalKeyAvailability];
+    NSNumber *rating = [[NSUserDefaults standardUserDefaults]secretObjectForKey:TaxiBookInternalKeyRating];
+    BOOL isAvailable = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyAvailability];
     self.firstNameTextField.text = firstName;
     self.lastNameTextField.text = lastName;
     self.emailLabel.text = email;
     self.phoneNumberTextField.text = phoneNumber;
-    if ([isAvailable  isEqual: @"1"])
+    double ratingDouble = [rating doubleValue];
+    self.ratingLabel.text = [NSString stringWithFormat:@"%.3g", ratingDouble];
+    if (isAvailable)
         [self.isAvailableSwitch setOn:(YES)];
     else
         [self.isAvailableSwitch setOn:(NO)];
     
+    BOOL hasProfilePic = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyHasProfilePic];
+    
+    if (hasProfilePic) {
+    
+        NSURL *imageUrl = [[NSUserDefaults standardUserDefaults] secretURLForKey:TaxiBookInternalKeyProfilePic];
+    
+        [self.profileImage setImageWithURL:imageUrl];
+    
+    }
+    else {
+        [self.profileImage setImage:[UIImage imageNamed:@"noProfilePic"]];
+    }
     
     
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editProfilePic:)];
+    singleTap.numberOfTapsRequired = 1;
+    singleTap.numberOfTouchesRequired = 1;
+    
+    [self.profileImage addGestureRecognizer:singleTap];
+    [self.profileImage setUserInteractionEnabled:YES];
+    
+    self.takeController = [[FDTakeController alloc] init];
+    self.takeController.viewControllerForPresentingImagePickerController = self;
+    self.takeController.delegate = self;
+    self.takeController.allowsEditingPhoto = YES;
+    self.takeController.tabBar = self.tabBarController.tabBar;
+}
+
+- (void)editProfilePic:(UIGestureRecognizer *)gestureRecognizer {
+    [self.takeController takePhotoOrChooseFromLibrary];
+    self.takeController.allowsEditingPhoto = false;
+    
+}
+
+- (void)takeController:(FDTakeController *)controller gotPhoto:(UIImage *)photo withInfo:(NSDictionary *)info
+{
+    [self.profileImage setImage:photo];
+    [SubView loadingView:nil];
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    TaxiBookConnectionManager *manager = [TaxiBookConnectionManager sharedManager];
+    
+    [manager editProfilePic:dict image:photo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSInteger statusCode = [[responseObject objectForKey:@"status_code"] integerValue];
+        if (statusCode == 1) {
+            // success
+            [SubView dismissAlert];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [SubView dismissAlert];
+        NSData *dataFromServer = operation.responseData;
+        
+        NSString *stringFromServer = [[NSString alloc] initWithData:dataFromServer encoding:NSUTF8StringEncoding];
+        NSLog(@"string from server : %@", stringFromServer);
+        
+        NSLog(@"Error: %@", error);
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Something happened" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+        [alertView show];
+        
+    } loginIfNeed:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,10 +135,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
+
 
 - (void)viewDidDisappear:(BOOL)animated
 {
@@ -220,11 +285,12 @@
         if (statusCode == 1) {
             // success
             
-            if (self.isAvailableSwitch.isOn)
-                [[NSUserDefaults standardUserDefaults] setSecretObject:@"1" forKey:TaxiBookInternalKeyAvailability];
-            else
-                [[NSUserDefaults standardUserDefaults] setSecretObject:@"0" forKey:TaxiBookInternalKeyAvailability];
-            
+            if (self.isAvailableSwitch.isOn) {
+                [[NSUserDefaults standardUserDefaults] setSecretBool:YES forKey:TaxiBookInternalKeyAvailability];
+                [[NSNotificationCenter defaultCenter] postNotificationName:TaxibookNotificationDriverStartWorking object:nil];
+            } else {
+                [[NSUserDefaults standardUserDefaults] setSecretBool:NO forKey:TaxiBookInternalKeyAvailability];
+            }
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             [SubView dismissAlert];

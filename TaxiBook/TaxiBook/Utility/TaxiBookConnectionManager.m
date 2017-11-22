@@ -73,7 +73,7 @@
     
     NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
     
-    NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/register/"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/register/"];
     
     [self.imageRequestManager POST:postUrl parameters:formDataParameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:imageData name:@"userfile" fileName:@"userfile.jpg" mimeType:@"image/jpeg"];
@@ -91,6 +91,64 @@
     } failure:failure];
 }
 
+- (void)editProfilePic:(NSDictionary *)formDataParameters image: (UIImage*) image success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure  loginIfNeed:(BOOL)loginIfNeed
+{
+    NSLog(@"edit profile pic");
+    
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/edit_profile_pic/"];
+    
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    // get email and session_token stored in nsuserdefault
+    
+    NSString *email = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyEmail];
+    if (!email) {
+        NSLog(@"email cannot find");
+        [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationEmailCannotFind object:nil];
+        return ;
+    }
+    NSString *sessionToken = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeySessionToken];
+    if (!sessionToken) {
+        NSLog(@"session token cannot find");
+        sessionToken = @""; // let it expire the token and re-login
+    } else {
+        [requestSerializer setValue:sessionToken forHTTPHeaderField:@"X-taxibook-session-token"];
+    }
+    [requestSerializer setValue:email forHTTPHeaderField:@"X-taxibook-email"];
+    [requestSerializer setValue:@"driver" forHTTPHeaderField:@"X-taxibook-user-type"];
+    
+    
+    NSMutableURLRequest *request = [requestSerializer multipartFormRequestWithMethod:@"POST" URLString:postUrl parameters:formDataParameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:imageData name:@"userfile" fileName:@"userfile.jpg" mimeType:@"image/jpeg"];
+    } error:nil];
+    
+    
+    AFHTTPRequestOperation *uploadOp = [self.imageRequestManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject){
+        
+        NSNumber *responseStatusCode = [responseObject objectForKey:@"status_code"];
+        
+        if (responseStatusCode && [responseStatusCode integerValue] < 0) {
+            NSError *errorWithMessage = [NSError errorWithDomain:TaxiBookServiceName code:[responseStatusCode integerValue] userInfo:@{@"message": [responseObject objectForKey:@"message"]}];
+            failure(operation, errorWithMessage); // negative reponse code consider to be fail
+        } else {
+            success(operation, responseObject);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSString *str = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
+        NSLog(@"server return error %@" ,str);
+        
+        failure(operation, error);
+    }];
+    
+    [self.imageRequestManager.operationQueue addOperation:uploadOp];
+    
+}
+
+
 
 - (void)loginwithParemeters:(NSDictionary *)formDataParameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
@@ -103,7 +161,7 @@
     }
     
     [self setIsLoggingIn:YES];
-    NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/login/"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/login/"];
     
     [self.normalRequestManager POST:postUrl parameters:formDataParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"received login data from server");
@@ -124,7 +182,12 @@
             NSString *phoneNumber = [responseObject objectForKey:@"phone_no"];
             NSString *email = [responseObject objectForKey:@"email"];
             NSString *licenseNo= [responseObject objectForKey:@"license_no"];
-            NSString *avail= [responseObject objectForKey:@"is_available"];
+            id profilePic = [responseObject objectForKey:@"profile_pic"];
+            NSNumber *rating = [responseObject objectForKey:@"average_rating"];
+            
+            
+            BOOL memberStatus = [[responseObject objectForKey:@"member_status_id"] boolValue];
+            BOOL avail= [[responseObject objectForKey:@"is_available"] boolValue];
             
             [[NSUserDefaults standardUserDefaults] setSecretObject:email forKey:TaxiBookInternalKeyEmail];
             [[NSUserDefaults standardUserDefaults] setSecretObject:licenseNo forKey:TaxiBookInternalKeyLicenseNo];
@@ -132,12 +195,22 @@
             [[NSUserDefaults standardUserDefaults] setSecretObject:lastName forKey:TaxiBookInternalKeyLastName];
             [[NSUserDefaults standardUserDefaults] setSecretObject:sessionToken forKey:TaxiBookInternalKeySessionToken];
             [[NSUserDefaults standardUserDefaults] setSecretObject:expireTime forKey:TaxiBookInternalKeySessionExpireTime];
-             [[NSUserDefaults standardUserDefaults] setSecretObject:avail forKey:TaxiBookInternalKeyAvailability];
+            [[NSUserDefaults standardUserDefaults] setSecretBool:avail forKey:TaxiBookInternalKeyAvailability];
+            [[NSUserDefaults standardUserDefaults] setSecretBool:memberStatus forKey:TaxiBookInternalKeyMemberStatus];
             [[NSUserDefaults standardUserDefaults] setSecretObject:phoneNumber forKey:TaxiBookInternalKeyPhone];
-            [[NSUserDefaults standardUserDefaults] setSecretInteger:did forKey:TaxiBookInternalKeyUserId];
-            [[NSUserDefaults standardUserDefaults] setSecretBool:YES forKey:TaxiBookInternalKeyLoggedIn];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+
             
+            if (profilePic == [NSNull null]) {
+                [[NSUserDefaults standardUserDefaults] setSecretBool:NO forKey:TaxiBookInternalKeyHasProfilePic];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyProfilePic];
+            } else {
+                [[NSUserDefaults standardUserDefaults] setSecretURL:[NSURL URLWithString:profilePic] forKey:TaxiBookInternalKeyProfilePic];
+                [[NSUserDefaults standardUserDefaults] setSecretBool:YES forKey:TaxiBookInternalKeyHasProfilePic];
+            }
+
+            [[NSUserDefaults standardUserDefaults] setSecretInteger:did forKey:TaxiBookInternalKeyUserId];
+            [[NSUserDefaults standardUserDefaults] setSecretBool:YES forKey:TaxiBookInternalKeyLoggedIn];            [[NSUserDefaults standardUserDefaults] synchronize];
+            [[NSUserDefaults standardUserDefaults] setSecretObject:rating forKey:TaxiBookInternalKeyRating];
             
             NSString *password = [formDataParameters objectForKey:@"password"];
             if (password) {
@@ -160,6 +233,16 @@
                     // we do not have photo upload for now
 //                    [self uploadImageToUrl:taxibookOperation.relativeUrl withParameters:taxibookOperation.params filePath:taxibookOperation.fileURL success:taxibookOperation.success failure:taxibookOperation.failure loginIfNeed:NO];
                 }
+            }
+            
+            // register apns token
+            NSString *apnsToken = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyAPNSToken];
+            if (apnsToken && [apnsToken length] > 0) {
+                [self postToUrl:@"/driver/register_apns_token/" withParameters:@{@"device_token": apnsToken} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSLog(@"register inside apns token %@", responseObject);
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    NSLog(@"error: register inside apns token %@", error);
+                } loginIfNeed:YES];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -205,9 +288,8 @@
     [requestSerializer setValue:email forHTTPHeaderField:@"X-taxibook-email"];
     [requestSerializer setValue:@"driver" forHTTPHeaderField:@"X-taxibook-user-type"];
     
-    NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, relativeUrl] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@", self.serverDomain, relativeUrl];
 
-    
     NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"POST" URLString:postUrl parameters:formDataParameters];
     
     AFHTTPRequestOperation *operation = [self.normalRequestManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -259,6 +341,8 @@
         if ([error.domain isEqualToString:TaxiBookServiceName]) {
             NSLog(@"received error from server %@ %@", relativeUrl, error);
         }
+//        NSString *str = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
+
         failure(operation, error);
     }];
     
@@ -298,8 +382,7 @@
     [requestSerializer setValue:email forHTTPHeaderField:@"X-taxibook-email"];
     [requestSerializer setValue:@"driver" forHTTPHeaderField:@"X-taxibook-user-type"];
     
-    NSString *getUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, relativeUrl] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
-    
+    NSString *getUrl = [NSString stringWithFormat:@"%@%@", self.serverDomain, relativeUrl];
     
     NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"GET" URLString:getUrl parameters:nil];
     
@@ -352,6 +435,10 @@
         if ([error.domain isEqualToString:TaxiBookServiceName]) {
             NSLog(@"received error from server %@ %@", relativeUrl, error);
         }
+        if ([error.domain isEqualToString:AFNetworkingErrorDomain]) {
+            NSString *str = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
+            NSLog(@"received error %@", str);
+        }
         failure(operation, error);
     }];
     [self.normalRequestManager.operationQueue addOperation:operation];
@@ -382,7 +469,7 @@
     [requestSerializer setValue:email forHTTPHeaderField:@"X-taxibook-email"];
     [requestSerializer setValue:@"driver" forHTTPHeaderField:@"X-taxibook-user-type"];
     
-    NSString *getUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/logout"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+    NSString *getUrl = [NSString stringWithFormat:@"%@%@", self.serverDomain, @"/driver/logout"];
     
     NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"GET" URLString:getUrl parameters:nil];
     
@@ -391,17 +478,21 @@
         NSLog(@"received logout confirm from server");
         
         [[NSUserDefaults standardUserDefaults] setSecretBool:NO forKey:TaxiBookInternalKeyLoggedIn];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyEmail];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyFirstName];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyLastName];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeySessionToken];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeySessionExpireTime];
-        [[NSUserDefaults standardUserDefaults] setSecretInteger:-1 forKey:TaxiBookInternalKeyUserId];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyLicenseNo];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyEmail];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyFirstName];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyLastName];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeySessionToken];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeySessionExpireTime];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyUserId];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyLicenseNo];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyPhone];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyProfilePic];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyAvailability];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyAPNSToken];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyRating];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyHasProfilePic];
         
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedOut object:nil];
         
         completionHandler(responseObject);
         
@@ -409,17 +500,22 @@
         NSLog(@"received error from server: logout function %@", error);
 
         [[NSUserDefaults standardUserDefaults] setSecretBool:NO forKey:TaxiBookInternalKeyLoggedIn];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyEmail];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyFirstName];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyLastName];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeySessionToken];
-        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeySessionExpireTime];
-        [[NSUserDefaults standardUserDefaults] setSecretInteger:-1 forKey:TaxiBookInternalKeyUserId];
-          [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyLicenseNo];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyEmail];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyFirstName];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyLastName];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeySessionToken];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeySessionExpireTime];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyUserId];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyLicenseNo];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyPhone];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyProfilePic];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyAvailability];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyAPNSToken];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyRating];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:TaxiBookInternalKeyHasProfilePic];
+        
         
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedOut object:nil];
         completionHandler(nil);
     }];
 
@@ -430,7 +526,7 @@
 - (id)init
 {
     if (self = [super init]) {
-        self.serverDomain = @"http://ec2-54-255-141-218.ap-southeast-1.compute.amazonaws.com/index.php/";
+        self.serverDomain = @"http://ec2-54-255-141-218.ap-southeast-1.compute.amazonaws.com/index.php";
         self.isLoggingIn = NO;
 //        __weak TaxiBookConnectionManager *weakSelf = self;
         [self.normalRequestManager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {

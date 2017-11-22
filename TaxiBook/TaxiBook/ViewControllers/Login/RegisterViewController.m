@@ -104,8 +104,8 @@
         [manager loginwithParemeters:@{@"email": self.emailTextField.text, @"password": self.passwordTextField.text, @"user_type": @"driver",@"license_no":self.driverLicense.text} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             //the notification is already included in login request
             //[[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedIn object:nil];
-            [self dismissViewControllerAnimated:YES completion:nil];
             [SubView dismissAlert];
+            [(DriverAppDelegate *)[[UIApplication sharedApplication] delegate] switchToMainView];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [SubView dismissAlert];
             NSLog(@"error login %@", error);
@@ -179,6 +179,16 @@
     self.takeController.allowsEditingPhoto = YES;
     self.takeController.tabBar = self.tabBarController.tabBar;
     
+    self.driverLicense.delegate=self;
+    
+    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+    numberToolbar.barStyle = UIBarStyleDefault;
+    numberToolbar.items = [NSArray arrayWithObjects:
+                           [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                           [[UIBarButtonItem alloc]initWithTitle:@"Next" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)],
+                           nil];
+    [numberToolbar sizeToFit];
+    self.phoneTextField.inputAccessoryView = numberToolbar;
 	// Do any additional setup after loading the view.
 //    [self.emailTextField setText:@"default_email2@email.com"];
 //    [self.phoneTextField setText:@"98765431"];
@@ -186,17 +196,28 @@
 //    [self.lastNameTextField setText:@"default_last"];
 //    [self.passwordTextField setText:@"passwordSecret"];
     
-  
-    
-
-    
 }
+
+-(void)doneWithNumberPad{
+    NSInteger nextTag = self.phoneTextField.tag + 1;
+    // Try to find next responder
+    UIResponder* nextResponder = [self.phoneTextField.superview viewWithTag:nextTag];
+    if (nextResponder) {
+        // Found next responder, so set it.
+        [nextResponder becomeFirstResponder];
+    } else {
+        // Not found, so remove keyboard.
+        [self.phoneTextField resignFirstResponder];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 -(void) viewWillDisappear:(BOOL)animated {
     if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {

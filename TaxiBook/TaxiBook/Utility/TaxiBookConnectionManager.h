@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AFNetworking/AFNetworkReachabilityManager.h"
-#import "AFNetworking/AFHTTPRequestOperationManager.h"
-#import "AFNetworking/AFHTTPSessionManager.h"
+#import "AFNetworking/AFNetworking.h"
+//#import "AFNetworking/AFNetworkReachabilityManager.h"
+//#import "AFNetworking/AFHTTPRequestOperationManager.h"
+//#import "AFNetworking/AFHTTPSessionManager.h"
 
 #pragma mark -
 #pragma mark - TaxiBookHTTPOperation
@@ -41,6 +42,8 @@ typedef enum {
 + (TaxiBookConnectionManager *)sharedManager;
 
 - (void)registerDriver:(NSDictionary *)formDataParameters image: (UIImage*) image success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+- (void)editProfilePic:(NSDictionary *)formDataParameters image: (UIImage*) image success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure loginIfNeed:(BOOL)loginIfNeed;
 
 - (void)loginwithParemeters:(NSDictionary *)formDataParameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 

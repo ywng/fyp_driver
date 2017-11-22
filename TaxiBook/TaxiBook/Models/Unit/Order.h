@@ -9,16 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "TaxiBookGPS.h"
 #import "Driver.h"
+#import "Passenger.h"
 
 
 typedef NS_ENUM(NSInteger, OrderStatus) {
     OrderStatusPending = 0,
     OrderStatusBidded = 1,
     OrderStatusCustomerConfirmed = 2,
-    OrderStatusDriverComing = 3,
-    OrderStatusDriverWaiting = 4,
-    OrderStatusDriverPickedUp = 5,
-    OrderStatusOrderFinished = 6,
+    OrderStatusOrderFinished = 3,
     OrderStatusUnknown = 1<<9
 };
 
@@ -39,13 +37,14 @@ typedef NS_ENUM(NSInteger, OrderStatus) {
 @property (strong, nonatomic) NSDate *estimatedPickupTime;
 
 @property (strong, nonatomic) Driver *confirmedDriver;
-
+@property (strong, nonatomic) Passenger *confirmedPassenger;
 
 // only inactive order
 @property (nonatomic) float actualPrice;
 
 + (Order *)newInstanceFromServerData:(id)jsonData;
 + (NSString *)orderStatusToString:(OrderStatus)status;
++ (NSString *)driverStatusUpdateToString:(OrderStatus)status;
 - (void)updateDetail:(Order *)order;
 
 @end

@@ -19,38 +19,6 @@
 
 
 @implementation SettingViewController
-- (IBAction)update_avail:(id)sender {
-    NSString *avail;
-    if([self.availSwitch isOn]){
-        avail=@"1";
-    } else {
-         avail=@"0";
-    }
-    
-    TaxiBookConnectionManager *connection=[TaxiBookConnectionManager sharedManager];
-    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:
-                            avail, @"avail", nil];
-    
-    [connection postToUrl:@"/driver/set_avail/" withParameters:params
-                          success:^(AFHTTPRequestOperation *operation, id responseObject){
-                              [[NSUserDefaults standardUserDefaults] setSecretObject:avail forKey:TaxiBookInternalKeyAvailability];
-                              [SubView dismissAlert];
-                          }
-                            failure:^(AFHTTPRequestOperation *operation, NSError *error){
-                                [SubView dismissAlert];
-                              
-                                [SubView showError:@"Fail to update availability, try again!" withTitle:@"Update Availability"];
-                                if([self.availSwitch isOn]){
-                                    [self.availSwitch setOn:NO animated:NO];
-                                }else {
-                                    [self.availSwitch setOn:YES animated:NO];
-                                }
-                                
-                                return;
-                          } loginIfNeed:YES];
-    [SubView loadingView:nil];
-    
-}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -65,16 +33,6 @@
 {
     [super viewDidLoad];
     
-    NSString *avail = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyAvailability];
-    
-    if([avail isEqualToString:@"1"]){
-           [self.availSwitch setOn:YES animated:NO];
-    }else if ([avail isEqualToString:@"0"]){
-           [self.availSwitch setOn:NO animated:NO];
-    }
-    
-
-
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -128,64 +86,14 @@
     }else if(indexPath.section==1){
         
     }else if(indexPath.section==2){
-        [[TaxiBookConnectionManager sharedManager] logoutDriverWithCompletionHandler:^(id responseObject) {
-            [SubView dismissAlert];
-        
-        }];
         [SubView loadingView:nil];
         
+        [[TaxiBookConnectionManager sharedManager] logoutDriverWithCompletionHandler:^(id responseObject) {
+            [SubView dismissAlert];
+            [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedOut object:nil];
+        }];
+
     }
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
 
 @end

@@ -155,20 +155,33 @@
         case OrderStatusCustomerConfirmed:
             return @"Trip confirmed";
             break;
-        case OrderStatusDriverComing:
-            return @"Driver is coming";
-            break;
-        case OrderStatusDriverPickedUp:
-            return @"Trip started";
-            break;
-        case OrderStatusDriverWaiting:
-            return @"Driver is waiting";
-            break;
         case OrderStatusOrderFinished:
             return @"Trip is finished";
             break;
         case OrderStatusPending:
             return @"Waiting for drivers to accept";
+            break;
+        case OrderStatusUnknown:
+        default:
+            return @"Unknown";
+            break;
+    }
+}
+
++ (NSString *)driverStatusUpdateToString:(OrderStatus)status
+{
+    switch (status) {
+        case OrderStatusBidded:
+            return @"Wait for passenger to confirm";
+            break;
+        case OrderStatusCustomerConfirmed:
+            return @"Trip is finished";
+            break;
+        case OrderStatusOrderFinished:
+            return @"";
+            break;
+        case OrderStatusPending:
+            return @"Accept this order";
             break;
         case OrderStatusUnknown:
         default:
@@ -192,6 +205,7 @@
     self.estimatedPickupTime = newOrder.estimatedPickupTime;
     self.estimatedPrice = newOrder.estimatedPrice;
     self.confirmedDriver = newOrder.confirmedDriver;
+    self.confirmedPassenger = newOrder.confirmedPassenger;
     self.actualPrice = newOrder.actualPrice;
 }
 

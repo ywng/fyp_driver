@@ -11,7 +11,7 @@
 @implementation TaxiBookStringSet
 
 NSString const *TaxiBookServiceName = @"com.taxibook.taxibook";
-NSString const *TaxiBookGoogleAPIIOSKey = @"AIzaSyAu-8oZWNCKRva2h2BFwrweMVRNdwbLDro";
+NSString const *TaxiBookGoogleAPIIOSKey = @"AIzaSyDICXJm7NJ-SXutreHUi09Q8TLZiJ9NFRU";
 NSString const *TaxiBookGoogleAPIServerKey = @"AIzaSyBA78cM911xXcBpOFMzD6BMjwjt2eLK2kM";
 
 #pragma mark -
@@ -20,6 +20,7 @@ NSString const *TaxiBookNotificationEmailCannotFind = @"com.taxibook.notificatio
 NSString const *TaxiBookNotificationUserLoggedIn = @"com.taxibook.notifiation.user.login";
 NSString const *TaxiBookNotificationUserLoggedOut = @"com.taxibook.notification.user.logout";
 NSString const *TaxiBookNotificationUserLoadOrderData = @"com.taxibook.notification.user.load.order.data";
+NSString const *TaxibookNotificationDriverStartWorking = @"com.taxibook.notification.driver.startWorking";
 
 #pragma mark -
 #pragma mark - Internal Key Mapping
@@ -37,7 +38,13 @@ NSString const *TaxiBookInternalKeySessionExpireTime = @"com.taxibook.internal.u
 NSString const *TaxiBookInternalKeyLoggedIn = @"com.taxibook.internal.user.loggedIn";
 NSString const *TaxiBookInternalKeyLanguage = @"com.taxibook.internal.user.language";
 NSString const *TaxiBookInternalKeyLicenseNo=@"com.taxibook.internal.user.licenseNo";
+NSString const *TaxiBookInternalKeyProfilePic=@"com.taxibook.internal.user.profilePic";
+NSString const *TaxiBookInternalKeyHasProfilePic=@"com.taxibook.internal.user.hasProfilePic";
+NSString const *TaxiBookInternalKeyRating=@"com.taxibook.internal.user.rating";
+
+NSString const *TaxiBookInternalKeyMemberStatus=@"com.taxibook.internal.user.memeberStatus";
 NSString const *TaxiBookInternalKeyAvailability=@"com.taxibook.internal.user.availability";
+NSString const *TaxiBookInternalKeyAPNSToken = @"com.taxibook.internal.user.apnstoken";
 
 
 @end

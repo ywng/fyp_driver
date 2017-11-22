@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "OrderModel.h"
 
-@interface OrderTableViewController : UITableViewController <OrderModelDelegate>
+@interface OrderTableViewController : UIViewController <OrderModelDelegate, UITableViewDataSource, UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIImageView *onHoldImageView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
